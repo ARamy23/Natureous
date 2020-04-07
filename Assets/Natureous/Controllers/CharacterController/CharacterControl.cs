@@ -22,6 +22,7 @@ namespace Natureous
         public bool MoveRight;
         public bool Jump;
         public bool Attack;
+        public bool Sprint;
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
