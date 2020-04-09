@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 3
-  CollidingParts: []
 --- !u!1 &612118710053108737
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 2
-  CollidingParts: []
 --- !u!1 &661301668725879798
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +754,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.091244526, y: -0.066563986, z: -0.00055361807}
+  m_ConnectedAnchor: {x: -0.091244526, y: -0.066563986, z: -0.0005538565}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -803,7 +801,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 1
-  CollidingParts: []
 --- !u!1 &2457687952799903989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1260,7 @@ MonoBehaviour:
   MoveRight: 0
   Jump: 0
   Attack: 0
+  Sprint: 0
   ColliderEdgePrefab: {fileID: 4689534388930112351, guid: 907fbe2fb3cc04fc786630fe544ddc7e,
     type: 3}
   BottomSpheres: []
@@ -1298,7 +1296,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 114
   m_CollisionDetection: 0
 --- !u!114 &8776325881793783636
 MonoBehaviour:
@@ -1627,7 +1625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 0
-  CollidingParts: []
 --- !u!1 &4738199873731682016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,7 +1827,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0024467986, y: -0.40595406, z: -0.005170578}
+  m_ConnectedAnchor: {x: -0.0024467986, y: -0.40595418, z: -0.0051703397}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1877,7 +1874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 3
-  CollidingParts: []
 --- !u!1 &5208481756794328295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1951,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.18760645, y: 0.22204688, z: -0.035217896}
+  m_ConnectedAnchor: {x: 0.18760645, y: 0.22204676, z: -0.035217896}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2002,7 +1998,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 0
-  CollidingParts: []
 --- !u!1 &5219412344054417826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2073,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0000012805019, y: 0.215689, z: -0.026496895}
+  m_ConnectedAnchor: {x: 0.000001280502, y: 0.21568888, z: -0.026496656}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2125,7 +2120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 0
-  CollidingParts: []
 --- !u!1 &5660810266176540156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,7 +2495,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 0
-  CollidingParts: []
 --- !u!1 &6458933485960658135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2579,7 +2572,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.27404684, y: 0.000000417287, z: -0.000000065192616}
+  m_ConnectedAnchor: {x: -0.27404684, y: 0.00000029807774, z: 0.00000017322597}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2626,7 +2619,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 2
-  CollidingParts: []
 --- !u!1 &6540334360254775800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,7 +2758,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.09124453, y: -0.066564, z: -0.00055361306}
+  m_ConnectedAnchor: {x: 0.09124453, y: -0.06656406, z: -0.0005538515}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2813,7 +2805,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 1
-  CollidingParts: []
 --- !u!1 &6759734030864842543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 0
-  CollidingParts: []
 --- !u!1 &8018441066661193818
 GameObject:
   m_ObjectHideFlags: 0
@@ -3419,7 +3409,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.27614456, y: 0.0000002408318, z: -0.000000026387594}
+  m_ConnectedAnchor: {x: 0.27614456, y: 0.00000024083178, z: 0.00000021203098}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -3466,7 +3456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 2
-  CollidingParts: []
 --- !u!1 &8582004402103118378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,7 +3628,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.27614462, y: 0.00000026444803, z: 0.00000034791785}
+  m_ConnectedAnchor: {x: -0.27614462, y: 0.0000003836573, z: 0.000000109499275}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -3686,7 +3675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalBodyPart: 2
-  CollidingParts: []
 --- !u!1 &9017315608369062190
 GameObject:
   m_ObjectHideFlags: 0

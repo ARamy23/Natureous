@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3ae28e8c975c44a39b0964f4c509c74, type: 3}
-  m_Name: MoveForward
+  m_Name: Player_Sprint_MoveForward
   m_EditorClassIdentifier: 
   AllowEarlyTurn: 1
-  LockDirection: 0
+  LockDirection: 1
   Constant: 0
   SpeedGraph:
     serializedVersion: 2
@@ -39,5 +39,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Speed: 1.8
+  Speed: 5
   BlockDistance: 0.1

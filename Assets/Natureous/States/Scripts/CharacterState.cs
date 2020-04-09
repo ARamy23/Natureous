@@ -17,8 +17,6 @@ namespace Natureous
             }
         }
 
-        
-
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             foreach(StateData stateData in ListOfAbilityData)

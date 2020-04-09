@@ -20,7 +20,7 @@ namespace Natureous
 
         private List<AttackInfo> FinishedAttacks = new List<AttackInfo>();
 
-        public override void OnEnter(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
+        public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             animator.SetBool(TransitionParameter.Attack.ToString(), false);
 
@@ -29,7 +29,7 @@ namespace Natureous
 
             gameObject.SetActive(true);
 
-            attackInfo.ResetInfo(this, characterStateBase.GetCharacterControl(animator));
+            attackInfo.ResetInfo(this, characterState.GetCharacterControl(animator));
 
             if (!AttackManager.Instance.CurrentAttacks.Contains(attackInfo))
             {
@@ -57,7 +57,6 @@ namespace Natureous
                 CharacterControl character = characterState.GetCharacterControl(animator);
                 if (character.Attack)
                 {
-                    Debug.Log("Uppercut triggered");
                     animator.SetBool(TransitionParameter.Attack.ToString(), true);
                 }
             }

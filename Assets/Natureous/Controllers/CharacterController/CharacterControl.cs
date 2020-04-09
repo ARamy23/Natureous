@@ -13,6 +13,8 @@ namespace Natureous
         Landing,
         Grounded,
         Attack,
+        Sprint,
+        Turn,
     }
 
     public class CharacterControl : MonoBehaviour

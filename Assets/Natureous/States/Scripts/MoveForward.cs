@@ -7,14 +7,30 @@ namespace Natureous
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AbilityData/MoveForward")]
     public class MoveForward : StateData
     {
+        public bool AllowEarlyTurn;
+        public bool LockDirection;
         public bool Constant;
         public AnimationCurve SpeedGraph;
         public float Speed;
         public float BlockDistance;
 
-        public override void OnEnter(CharacterState  characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
+        public override void OnEnter(CharacterState  characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
+            if (AllowEarlyTurn)
+            {
+                CharacterControl control = characterState.GetCharacterControl(animator);
 
+                if (control.MoveLeft)
+                {
+                    control.ChangeFacingDirection(IsFacingRight: false);
+                }
+
+                if (control.MoveRight)
+                {
+                    control.ChangeFacingDirection(IsFacingRight: true);
+                }
+
+            }
         }
 
         public override void UpdateAbility(CharacterState  characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -60,7 +76,9 @@ namespace Natureous
 
             if (controller.MoveRight)
             {
-                controller.ChangeFacingDirection(IsFacingRight: true);
+                if (!LockDirection)
+                    controller.ChangeFacingDirection(IsFacingRight: true);
+
                 if (IsBlocked(controller))
                     return;
                 controller.MoveForward(Speed, SpeedGraph.Evaluate(stateInfo.normalizedTime));
@@ -68,7 +86,9 @@ namespace Natureous
 
             if (controller.MoveLeft)
             {
-                controller.ChangeFacingDirection(IsFacingRight: false);
+                if (!LockDirection)
+                    controller.ChangeFacingDirection(IsFacingRight: false);
+
                 if (IsBlocked(controller))
                     return;
                 controller.MoveForward(Speed, SpeedGraph.Evaluate(stateInfo.normalizedTime));

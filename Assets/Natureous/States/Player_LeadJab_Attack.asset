@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_LeadJab_Attack
   m_EditorClassIdentifier: 
   AttackStartTime: 0.15
-  AttackEndTime: 0.52
+  AttackEndTime: 0.85
   ColliderNames:
   - LeftHand
   - mixamorig:LeftHand
