@@ -16,50 +16,11 @@ namespace Natureous
 
         void Update()
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                VirtualInputManager.Instance.Sprint = true;
-            }
-            else
-            {
-                VirtualInputManager.Instance.Sprint = false;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                VirtualInputManager.Instance.MoveRight = true;
-            }
-            else
-            {
-                VirtualInputManager.Instance.MoveRight = false;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                VirtualInputManager.Instance.MoveLeft = true;
-            }
-            else
-            {
-                VirtualInputManager.Instance.MoveLeft = false;
-            }
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                VirtualInputManager.Instance.Jump = true;
-            }
-            else
-            {
-                VirtualInputManager.Instance.Jump = false;
-            }
-
-            if(Input.GetKey(KeyCode.J))
-            {
-                VirtualInputManager.Instance.Attack = true;
-            }
-            else
-            {
-                VirtualInputManager.Instance.Attack = false;
-            }
+            VirtualInputManager.Instance.Sprint = Input.GetKey(KeyCode.LeftShift);
+            VirtualInputManager.Instance.MoveRight = Input.GetKey(KeyCode.D);
+            VirtualInputManager.Instance.MoveLeft = Input.GetKey(KeyCode.A);
+            VirtualInputManager.Instance.Jump = Input.GetKey(KeyCode.Space);
+            VirtualInputManager.Instance.Attack = Input.GetKey(KeyCode.J);
         }
     }
 }
