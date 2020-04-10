@@ -14,11 +14,18 @@ namespace Natureous
         public float Speed;
         public float BlockDistance;
 
+        [Header("Momentum")]
+        public bool UseMomentum;
+        public float MaxMomentum;
+        public bool ShouldClearMomentum;
+        public float StartingMomentum;
+
         public override void OnEnter(CharacterState  characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
+            CharacterControl control = characterState.GetCharacterControl(animator);
+
             if (AllowEarlyTurn)
             {
-                CharacterControl control = characterState.GetCharacterControl(animator);
 
                 if (control.MoveLeft)
                 {
@@ -31,6 +38,9 @@ namespace Natureous
                 }
 
             }
+
+            // TODO: - remove comment when character has animationProgress
+            //control.animationProgress.AirMomentum = StartingMomentum > 0.00f && control.IsFacingRightDirection() ? StartingMomentum : -StartingMomentum;
         }
 
         public override void UpdateAbility(CharacterState  characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
@@ -95,9 +105,15 @@ namespace Natureous
             }
         }
 
-        public override void OnExit(CharacterState  characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
+        public override void OnExit(CharacterState  characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
+            if (ShouldClearMomentum)
+            {
+                CharacterControl control = characterState.GetCharacterControl(animator);
 
+                // TODO: - remove comment when character has animationProgress
+                //control.animationProgress.AirMomentum = 0.0f;
+            }
         }
         
         bool IsBlocked(CharacterControl control)
