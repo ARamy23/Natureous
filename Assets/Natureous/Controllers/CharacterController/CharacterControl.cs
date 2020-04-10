@@ -15,16 +15,21 @@ namespace Natureous
         Attack,
         Sprint,
         Turn,
+        TransitionIndex,
     }
 
     public class CharacterControl : MonoBehaviour
     { 
         public Animator SkinnedMeshAnimator;
+        public bool MoveUp;
+        public bool MoveDown;
         public bool MoveLeft;
         public bool MoveRight;
         public bool Jump;
         public bool Attack;
         public bool Sprint;
+        public LedgeChecker LedgeChecker;
+
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
