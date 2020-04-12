@@ -16,6 +16,8 @@ namespace Natureous
 
         void Update()
         {
+            VirtualInputManager.Instance.MoveUp = Input.GetKey(KeyCode.W);
+            VirtualInputManager.Instance.MoveDown = Input.GetKey(KeyCode.S);
             VirtualInputManager.Instance.Sprint = Input.GetKey(KeyCode.LeftShift);
             VirtualInputManager.Instance.MoveRight = Input.GetKey(KeyCode.D);
             VirtualInputManager.Instance.MoveLeft = Input.GetKey(KeyCode.A);

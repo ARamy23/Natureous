@@ -48,7 +48,7 @@ namespace Natureous
 
                     if (Physics.Raycast(sphere.transform.position, -Vector3.up, out hit, Distance))
                     {
-                        if (!character.RagdollParts.Contains(hit.collider))
+                        if (!character.RagdollParts.Contains(hit.collider) && !Ledge.IsLedge(hit.collider.gameObject))
                             return true;
                     }
                 }

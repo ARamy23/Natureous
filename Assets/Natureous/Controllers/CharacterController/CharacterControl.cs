@@ -15,23 +15,30 @@ namespace Natureous
         Attack,
         Sprint,
         Turn,
+        TransitionIndex,
+    }
+
+    public enum PlayableCharacterType
+    {
+        None,
+        YBot,
     }
 
     public class CharacterControl : MonoBehaviour
     { 
-        public Animator SkinnedMeshAnimator;
+        public bool MoveUp;
+        public bool MoveDown;
         public bool MoveLeft;
         public bool MoveRight;
         public bool Jump;
         public bool Attack;
         public bool Sprint;
+        public LedgeChecker LedgeChecker;
+
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
-        public List<Collider> RagdollParts = new List<Collider>();
-        public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts =
-            new Dictionary<TriggerDetector, List<Collider>>();
-
+        public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>();
 
         public Material material;
 
@@ -42,6 +49,11 @@ namespace Natureous
         
         private Rigidbody rigid;
 
+        [Header("Setup")]
+        public PlayableCharacterType playableCharacterType;
+        public Animator SkinnedMeshAnimator;
+        public List<Collider> RagdollParts = new List<Collider>();
+
         public Rigidbody Rigidbody
         {
             get
@@ -49,7 +61,6 @@ namespace Natureous
                 if (rigid == null)
                 {
                     rigid = GetComponent<Rigidbody>();
-
                 }
 
                 return rigid;
@@ -60,6 +71,7 @@ namespace Natureous
         {
             ChangeFacingDirection(IsFacingRight: IsFacingRightDirection());
             SetupColliderSpheres();
+            RegisterCharacter();
         }
 
         public void SetRagdolParts()
@@ -202,6 +214,14 @@ namespace Natureous
                 {
                     renderer.material = material;
                 }
+            }
+        }
+
+        private void RegisterCharacter()
+        {
+            if (!CharacterManager.Instance.Characters.Contains(this))
+            {
+                CharacterManager.Instance.Characters.Add(this);
             }
         }
     }
