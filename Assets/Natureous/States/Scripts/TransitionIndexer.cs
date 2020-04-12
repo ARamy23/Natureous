@@ -41,7 +41,7 @@ namespace Natureous
 
         public override void OnExit(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
-
+            animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
         }
 
         private bool MakeTransition(CharacterControl control)

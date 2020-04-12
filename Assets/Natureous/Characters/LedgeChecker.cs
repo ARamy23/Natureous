@@ -30,7 +30,7 @@ namespace Natureous
             if (didCollideWithALedge)
             {
                 isGrabbingLedge = false;
-                GrabbedLedge = null;
+                //GrabbedLedge = null;
             }
         }
     }

@@ -24,7 +24,7 @@ namespace Natureous
 
         public override void UpdateAbility(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
-
+            
         }
     }
 }
