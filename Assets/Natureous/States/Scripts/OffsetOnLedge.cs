@@ -10,6 +10,7 @@ namespace Natureous
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
+            animator.SetBool(TransitionParameter.Jump.ToString(), false);
             GameObject anim = control.SkinnedMeshAnimator.gameObject;
             anim.transform.parent = control.LedgeChecker.GrabbedLedge.transform;
             anim.transform.localPosition = control.LedgeChecker.GrabbedLedge.Offset;

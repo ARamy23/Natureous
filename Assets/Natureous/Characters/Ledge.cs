@@ -8,6 +8,11 @@ namespace Natureous
     {
         public Vector3 Offset;
         public Vector3 EndPosition;
+
+        public static bool IsLedge(GameObject gameObject)
+        {
+            return gameObject.GetComponent<Ledge>() != null;
+        }
     }
 }
 

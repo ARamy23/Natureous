@@ -379,6 +379,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-4203221105954324763
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 3
+    m_ConditionEvent: TransitionIndex
+    m_EventTreshold: 2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1052232241104384310}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.85
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-3955738264773787532
 AnimatorState:
   serializedVersion: 5
@@ -646,7 +671,9 @@ AnimatorState:
   m_Name: Crouch Idle
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -2107450662005533359}
+  - {fileID: -4203221105954324763}
   m_StateMachineBehaviours:
   - {fileID: 224355122533831130}
   m_Position: {x: 50, y: 50, z: 0}
@@ -692,6 +719,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-2107450662005533359
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 6
+    m_ConditionEvent: TransitionIndex
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 4221183626661009297}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.4
+  m_TransitionOffset: 0
+  m_ExitTime: 0.85
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-2097397643195712034
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1043,6 +1095,9 @@ MonoBehaviour:
   ListOfAbilityData:
   - {fileID: 11400000, guid: 8514bbba5f7d94b7a9735b25fa0cf531, type: 2}
   - {fileID: 11400000, guid: 4855dae76747e4e2981384830b162519, type: 2}
+  - {fileID: 11400000, guid: 9ab30d29ac17f4f46a68f523bfb84127, type: 2}
+  - {fileID: 11400000, guid: caea68973dc4745769938f5d515032ad, type: 2}
+  - {fileID: 11400000, guid: 6cfbaae3991a44730a4899711c35585f, type: 2}
 --- !u!114 &584622380260776390
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,6 +13,7 @@ namespace Natureous
         Attack,
         Jump,
         GrabbingLedge,
+        Sprint,
     }
 
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AbilityData/TransitionIndexer")]
@@ -70,6 +71,9 @@ namespace Natureous
                         break;
                     case TransitionConditionType.GrabbingLedge:
                         if (!control.LedgeChecker.isGrabbingLedge) return false;
+                        break;
+                    case TransitionConditionType.Sprint:
+                        if (!control.Sprint) return false;
                         break;
                 }
             }
