@@ -7,6 +7,8 @@ namespace Natureous
     public enum PoolObjectType
     {
         AttackInfo,
+        ThorHammer,
+        HammerDownVFX,
     }
 
     public class PoolObjectLoader: MonoBehaviour
@@ -14,14 +16,7 @@ namespace Natureous
         
         public static PoolObject InstantiatePrefab(PoolObjectType objectType)
         {
-            GameObject gameObject = null;
-
-            switch (objectType ){
-                case PoolObjectType.AttackInfo:
-                    gameObject = Instantiate(Resources.Load(objectType.ToString(), typeof(GameObject)) as GameObject);
-                    break;
-            }
-
+            GameObject gameObject = Instantiate(Resources.Load(objectType.ToString(), typeof(GameObject)) as GameObject, Vector3.zero, Quaternion.identity);
             return gameObject.GetComponent<PoolObject>();
         }
 

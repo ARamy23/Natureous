@@ -43,6 +43,7 @@ namespace Natureous
         public Material material;
 
         private List<TriggerDetector> TriggerDetectors = new List<TriggerDetector>();
+        private Dictionary<string, GameObject> ChildObjects = new Dictionary<string, GameObject>();
 
         public float GravityMultiplier;
         public float PullMultiplier;
@@ -223,6 +224,30 @@ namespace Natureous
             {
                 CharacterManager.Instance.Characters.Add(this);
             }
+        }
+
+        public GameObject GetChildObject(string name)
+        {
+
+            if (ChildObjects.ContainsKey(name))
+            {
+                return ChildObjects[name];
+            }
+
+            Transform[] transforms = this.gameObject.GetComponentsInChildren<Transform>();
+
+            foreach (var transform in transforms)
+            {
+                if (transform.gameObject.name.Equals(name))
+                {
+                    var foundGameObject = transform.gameObject;
+                    ChildObjects.Add(name, foundGameObject);
+                    return foundGameObject;
+
+                }
+            }
+
+            return null;
         }
     }
 }

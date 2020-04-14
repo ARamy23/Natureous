@@ -21,7 +21,7 @@ namespace Natureous
         public bool IsRegistered;
         public bool IsFinished;
 
-        public bool LaunchIntoAir;
+        public DeathType deathType;
 
         public void ResetInfo(Attack attack, CharacterControl attacker)
         {
@@ -41,7 +41,7 @@ namespace Natureous
             LethalRange = attack.LethalRange;
             MaxHits = attack.MaxHits;
             CurrentHits = 0;
-            LaunchIntoAir = attack.LaunchIntoAir;
+            deathType = attack.deathType;
 
         }
 
