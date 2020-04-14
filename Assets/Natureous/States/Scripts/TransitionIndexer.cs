@@ -38,6 +38,10 @@ namespace Natureous
             {
                 animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), Index);
             }
+            else
+            {
+                animator.SetInteger(TransitionParameter.TransitionIndex.ToString(), 0);
+            }
         }
 
         public override void OnExit(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)

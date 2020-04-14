@@ -1818,6 +1818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ListOfAbilityData:
   - {fileID: 11400000, guid: 2eac327fde6b14a84b3f67df7044c63a, type: 2}
+  - {fileID: 11400000, guid: d6071c36789954c9d80bcf99e48614e5, type: 2}
 --- !u!1102 &4159809529267898032
 AnimatorState:
   serializedVersion: 5
@@ -2066,6 +2067,7 @@ MonoBehaviour:
   ListOfAbilityData:
   - {fileID: 11400000, guid: feb1009b273e045a8a7478d0f20e8bbb, type: 2}
   - {fileID: 11400000, guid: e25903f19c13241e9a0e2c803bcf0ede, type: 2}
+  - {fileID: 11400000, guid: ea5243a4085da439f8f0fbd785084679, type: 2}
 --- !u!1102 &5809849406795631705
 AnimatorState:
   serializedVersion: 5

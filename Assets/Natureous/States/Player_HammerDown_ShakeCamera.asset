@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d436f889ea7646dd8fa372b454f3d98, type: 3}
   m_Name: Player_HammerDown_ShakeCamera
   m_EditorClassIdentifier: 
-  ShakeTiming: 0.7
+  ShakeTiming: 0.05
   ShakeDuration: 0.5
