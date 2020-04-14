@@ -52,7 +52,8 @@ namespace Natureous
                 GameObject parentObjectToEquipSpawnnedObjectTo = control.GetChildObject(ParentObjectName);
                 spawnnedObject.transform.parent = parentObjectToEquipSpawnnedObjectTo.transform;
                 spawnnedObject.transform.localPosition = Vector3.zero;
-                spawnnedObject.transform.rotation = Quaternion.identity;
+                spawnnedObject.transform.localRotation = Quaternion.identity;
+                //spawnnedObject.transform.rotation = Quaternion.identity;
             }
 
             spawnnedObject.SetActive(true);

@@ -15,7 +15,7 @@ namespace Natureous
         
         public static PoolObject InstantiatePrefab(PoolObjectType objectType)
         {
-            GameObject gameObject = Instantiate(Resources.Load(objectType.ToString(), typeof(GameObject)) as GameObject);
+            GameObject gameObject = Instantiate(Resources.Load(objectType.ToString(), typeof(GameObject)) as GameObject, Vector3.zero, Quaternion.identity);
             return gameObject.GetComponent<PoolObject>();
         }
 
