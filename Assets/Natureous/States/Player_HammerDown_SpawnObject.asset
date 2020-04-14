@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnTiming: 0
   ParentObjectName: Weapon Position - Thor Hammer
+  poolObjectType: 1
+  shouldStickToParent: 1

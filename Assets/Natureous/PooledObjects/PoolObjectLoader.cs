@@ -8,6 +8,7 @@ namespace Natureous
     {
         AttackInfo,
         ThorHammer,
+        HammerDownVFX,
     }
 
     public class PoolObjectLoader: MonoBehaviour

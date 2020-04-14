@@ -14,6 +14,10 @@ namespace Natureous
 
         public string ParentObjectName = string.Empty;
 
+        public PoolObjectType poolObjectType;
+
+        public bool shouldStickToParent;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             if(SpawnTiming == 0f)
@@ -45,7 +49,7 @@ namespace Natureous
 
         private void SpawnObj(CharacterControl control)
         {
-            GameObject spawnnedObject = PoolManager.Instance.GetObject(PoolObjectType.ThorHammer);
+            GameObject spawnnedObject = PoolManager.Instance.GetObject(poolObjectType);
 
             if (!string.IsNullOrEmpty(ParentObjectName))
             {
@@ -53,7 +57,11 @@ namespace Natureous
                 spawnnedObject.transform.parent = parentObjectToEquipSpawnnedObjectTo.transform;
                 spawnnedObject.transform.localPosition = Vector3.zero;
                 spawnnedObject.transform.localRotation = Quaternion.identity;
-                //spawnnedObject.transform.rotation = Quaternion.identity;
+            }
+
+            if (!shouldStickToParent)
+            {
+                spawnnedObject.transform.parent = null;
             }
 
             spawnnedObject.SetActive(true);
