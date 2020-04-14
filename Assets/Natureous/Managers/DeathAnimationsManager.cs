@@ -26,33 +26,28 @@ namespace Natureous
 
             foreach(DeathAnimationData data in deathAnimationLoader.DeathAnimationDataList)
             {
-                if (attackInfo.LaunchIntoAir)
+                if (attackInfo.deathType == data.deathType)
                 {
-                    if (data.LaunchIntoAir)
+                    if (attackInfo.deathType == DeathType.LaunchIntoAir)
                     {
-
                         SuitableDeathAnimators.Add(data.Animator);
+                        break;
                     }
-                }
-                else if (!attackInfo.MustCollide)
-                {
-                    foreach (GeneralBodyPart part in data.GeneralBodyParts)
+
+                    if (!attackInfo.MustCollide)
                     {
-                        if (part == GeneralBodyPart.Leg || part == GeneralBodyPart.Lower)
-                        {
-                            SuitableDeathAnimators.Add(data.Animator);
-                            break;
-                        }
+                        SuitableDeathAnimators.Add(data.Animator);
+                        break;
                     }
-                }
-                else
-                {
-                    foreach (GeneralBodyPart part in data.GeneralBodyParts)
+                    else
                     {
-                        if (part == generalBodyPart)
+                        foreach (GeneralBodyPart part in data.GeneralBodyParts)
                         {
-                            SuitableDeathAnimators.Add(data.Animator);
-                            break;
+                            if (part == generalBodyPart)
+                            {
+                                SuitableDeathAnimators.Add(data.Animator);
+                                break;
+                            }
                         }
                     }
                 }

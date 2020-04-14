@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28306861af91b4642be7ea46776dfd14, type: 3}
-  m_Name: Player_Uppercut_Jump
+  m_Name: Player_RunningHammerDown_Jump
   m_EditorClassIdentifier: 
-  JumpTiming: 0.03
+  JumpTiming: 0.23
   JumpForce: 250
   Pull:
     serializedVersion: 2
@@ -22,18 +22,18 @@ MonoBehaviour:
       value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 34
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

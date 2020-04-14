@@ -12,7 +12,7 @@ namespace Natureous
 
         public List<string> ColliderNames = new List<string>();
 
-        public bool LaunchIntoAir;
+        public DeathType deathType;
         public bool MustCollide;
         public bool MustFaceTheAttacker;
         public float LethalRange;
