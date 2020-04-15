@@ -16,7 +16,7 @@ namespace Natureous
         {
             CharacterControl control = characterStateBase.GetCharacterControl(animator);
 
-            if (control.Attack)
+            if (control.animationProgress.AttackTriggered)
             {
                 animator.SetBool(TransitionParameter.Attack.ToString(), true);
             }

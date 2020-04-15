@@ -71,7 +71,7 @@ namespace Natureous
                         if (!control.Jump) return false;
                         break;
                     case TransitionConditionType.Attack:
-                        if (!control.Attack) return false;
+                        if (!control.animationProgress.AttackTriggered) return false;
                         break;
                     case TransitionConditionType.GrabbingLedge:
                         if (!control.LedgeChecker.isGrabbingLedge) return false;

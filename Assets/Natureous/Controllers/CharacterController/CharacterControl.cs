@@ -33,6 +33,8 @@ namespace Natureous
         public bool Jump;
         public bool Attack;
         public bool Sprint;
+
+        public AnimationProgress animationProgress;
         public LedgeChecker LedgeChecker;
 
         public GameObject ColliderEdgePrefab;
@@ -70,6 +72,7 @@ namespace Natureous
 
         private void Awake()
         {
+            animationProgress = GetComponent<AnimationProgress>();
             ChangeFacingDirection(IsFacingRight: IsFacingRightDirection());
             SetupColliderSpheres();
             RegisterCharacter();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace Natureous
         public static bool IsLedge(GameObject gameObject)
         {
             return gameObject.GetComponent<Ledge>() != null;
+        }
+
+        internal static bool IsLedgeChecker(GameObject gameObject)
+        {
+            return gameObject.GetComponent<LedgeChecker>() != null;
         }
     }
 }

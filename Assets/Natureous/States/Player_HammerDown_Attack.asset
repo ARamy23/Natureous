@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ddd987d6e934609b923a87979a1119, type: 3}
   m_Name: Player_HammerDown_Attack
   m_EditorClassIdentifier: 
-  AttackStartTime: 0.3
-  AttackEndTime: 0.4
+  AttackStartTime: 0.2
+  AttackEndTime: 0.35
   ColliderNames: []
-  LaunchIntoAir: 0
+  deathType: 2
   MustCollide: 0
   MustFaceTheAttacker: 1
   LethalRange: 5
