@@ -28,16 +28,14 @@ namespace Natureous
             {
                 if (attackInfo.deathType == data.deathType)
                 {
-                    if (attackInfo.deathType == DeathType.LaunchIntoAir)
+                    if (attackInfo.deathType != DeathType.None)
                     {
                         SuitableDeathAnimators.Add(data.Animator);
-                        break;
                     }
 
                     if (!attackInfo.MustCollide)
                     {
                         SuitableDeathAnimators.Add(data.Animator);
-                        break;
                     }
                     else
                     {

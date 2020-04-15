@@ -9,8 +9,11 @@ namespace Natureous
         CharacterControl character;
         GeneralBodyPart DamagedBodyPart;
 
+        public int DamageTaken;
+
         private void Awake()
         {
+            DamageTaken = 0;
             character = GetComponent<CharacterControl>();
         }
 
@@ -72,10 +75,13 @@ namespace Natureous
                 {
                     foreach (string name in attackInfo.ColliderNames)
                     {
-                        if (name == collider.name)
+                        if (name.Equals(collider.name))
                         {
-                            DamagedBodyPart = collidingBodyPart.Key.generalBodyPart;
-                            return true;
+                            if (collider.transform.root.gameObject == attackInfo.Attacker.gameObject)
+                            {
+                                DamagedBodyPart = collidingBodyPart.Key.generalBodyPart;
+                                return true;
+                            }
                         }
 
                     }
@@ -87,15 +93,19 @@ namespace Natureous
 
         private void TakeDamage(AttackInfo attack)
         {
+            if (DamageTaken > 0) return;
             character.SkinnedMeshAnimator.runtimeAnimatorController = DeathAnimationsManager.Instance.GetAnimator(DamagedBodyPart, attack);
 
             attack.CurrentHits++;
 
             character.GetComponent<BoxCollider>().enabled = false;
+            character.LedgeChecker.GetComponent<BoxCollider>().enabled = false;
             character.Rigidbody.useGravity = false;
 
             if (attack.MustCollide)
                 CameraManager.Instance.ShakeCamera(duration: 0.5f);
+
+            DamageTaken++;
         }
     }
 }

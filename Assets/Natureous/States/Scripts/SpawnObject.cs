@@ -10,8 +10,6 @@ namespace Natureous
         [Range(0f, 1f)]
         public float SpawnTiming;
 
-        private bool IsSpawned;
-
         public string ParentObjectName = string.Empty;
 
         public PoolObjectType poolObjectType;
@@ -24,31 +22,33 @@ namespace Natureous
             {
                 CharacterControl control = characterState.GetCharacterControl(animator);
                 SpawnObj(control);
-                IsSpawned = true;
             }
         }
 
         public override void UpdateAbility(CharacterState characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
         {
+            CharacterControl control = characterStateBase.GetCharacterControl(animator);
 
-            if (!IsSpawned)
+            if (!control.animationProgress.PoolObjectList.Contains(poolObjectType))
             {
                 if (stateInfo.normalizedTime >= SpawnTiming)
                 {
-                    CharacterControl control = characterStateBase.GetCharacterControl(animator);
                     SpawnObj(control);
-                    IsSpawned = true; 
                 }
             }
         }
 
-        public override void OnExit(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
-            IsSpawned = false;
+            var control = characterState.GetCharacterControl(animator);
+            if (control.animationProgress.PoolObjectList.Contains(poolObjectType))
+                control.animationProgress.PoolObjectList.Remove(poolObjectType);
         }
 
         private void SpawnObj(CharacterControl control)
         {
+            if (control.animationProgress.PoolObjectList.Contains(poolObjectType)) return;
+
             GameObject spawnnedObject = PoolManager.Instance.GetObject(poolObjectType);
 
             if (!string.IsNullOrEmpty(ParentObjectName))
@@ -66,6 +66,7 @@ namespace Natureous
 
             spawnnedObject.SetActive(true);
 
+            control.animationProgress.PoolObjectList.Add(poolObjectType);
         }
     }
 }

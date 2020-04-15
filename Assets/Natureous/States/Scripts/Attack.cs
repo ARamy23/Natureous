@@ -55,7 +55,7 @@ namespace Natureous
             if (isInComboTimeRange)
             {
                 CharacterControl character = characterState.GetCharacterControl(animator);
-                if (character.Attack)
+                if (character.animationProgress.AttackTriggered)
                 {
                     animator.SetBool(TransitionParameter.Attack.ToString(), true);
                 }

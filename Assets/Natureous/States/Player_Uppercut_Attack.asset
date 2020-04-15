@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Player_Uppercut_Attack
   m_EditorClassIdentifier: 
   AttackStartTime: 0.3
-  AttackEndTime: 0.6
+  AttackEndTime: 0.8
   ColliderNames:
   - mixamorig:RightHand
-  LaunchIntoAir: 1
+  deathType: 1
   MustCollide: 1
-  MustFaceTheAttacker: 1
+  MustFaceTheAttacker: 0
   LethalRange: 0
   MaxHits: 1

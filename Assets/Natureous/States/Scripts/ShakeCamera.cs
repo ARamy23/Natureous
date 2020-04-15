@@ -10,31 +10,33 @@ namespace Natureous
         [Range(0f, 0.99f)]
         public float ShakeTiming;
         public float ShakeDuration = 0.5f;
-        private bool isShaking = false;
 
 
-        public override void OnEnter(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
+        public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
+            
             if (ShakeTiming == 0f)
             {
+                var control = characterState.GetCharacterControl(animator);
                 CameraManager.Instance.ShakeCamera(ShakeDuration);
-                isShaking = true;
+                control.animationProgress.isShakingCamera = true;
             }
-                
         }
 
-        public override void UpdateAbility(CharacterState characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            if (!isShaking && stateInfo.normalizedTime >= ShakeTiming)
+            var control = characterState.GetCharacterControl(animator);
+            if (!control.animationProgress.isShakingCamera && stateInfo.normalizedTime >= ShakeTiming)
             {
                 CameraManager.Instance.ShakeCamera(ShakeDuration);
-                isShaking = true;
+                control.animationProgress.isShakingCamera = true;
             }
         }
 
-        public override void OnExit(CharacterState characterStateBase, Animator animator, AnimatorStateInfo stateInfo)
+        public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
-            isShaking = false;
+            var control = characterState.GetCharacterControl(animator);
+            control.animationProgress.isShakingCamera = false;
         }
     }
 }

@@ -12,14 +12,14 @@ namespace Natureous
         public float JumpForce;
         //public AnimationCurve Gravity;
         public AnimationCurve Pull;
-        private bool hasPlayerJumped;
 
         public override void OnEnter(CharacterState  characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             if (JumpTiming == 0f)
             {
-                characterStateBase.GetCharacterControl(animator).Rigidbody.AddForce(Vector3.up * JumpForce);
-                hasPlayerJumped = true;
+                var control = characterStateBase.GetCharacterControl(animator);
+                control.Rigidbody.AddForce(Vector3.up * JumpForce);
+                control.animationProgress.hasPlayerJumped = true;
             }
 
             animator.SetBool(TransitionParameter.Grounded.ToString(), false);
@@ -31,10 +31,10 @@ namespace Natureous
             //control.GravityMultiplier = Gravity.Evaluate(stateInfo.normalizedTime); 
             control.PullMultiplier = Pull.Evaluate(stateInfo.normalizedTime);
 
-            if (!hasPlayerJumped && stateInfo.normalizedTime >= JumpTiming)
+            if (!control.animationProgress.hasPlayerJumped && stateInfo.normalizedTime >= JumpTiming)
             {
                 characterStateBase.GetCharacterControl(animator).Rigidbody.AddForce(Vector3.up * JumpForce);
-                hasPlayerJumped = true;
+                control.animationProgress.hasPlayerJumped = true;
             }
 
         }
@@ -44,7 +44,7 @@ namespace Natureous
             CharacterControl control = characterStateBase.GetCharacterControl(animator);
             //control.GravityMultiplier = Gravity.Evaluate(stateInfo.normalizedTime); 
             control.PullMultiplier = 0f;
-            hasPlayerJumped = false;
+            control.animationProgress.hasPlayerJumped = false;
 
         }
     }
