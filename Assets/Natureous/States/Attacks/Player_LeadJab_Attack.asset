@@ -17,7 +17,7 @@ MonoBehaviour:
   ColliderNames:
   - LeftHand
   - mixamorig:LeftHand
-  LaunchIntoAir: 0
+  deathType: 0
   MustCollide: 1
   MustFaceTheAttacker: 0
   LethalRange: 0

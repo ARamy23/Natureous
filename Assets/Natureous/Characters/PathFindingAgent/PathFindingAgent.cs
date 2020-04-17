@@ -11,7 +11,15 @@ namespace Natureous
         public GameObject Target;
         NavMeshAgent navMeshAgent;
 
-        Coroutine MoveCoroutine;
+        public Vector3 StartPosition; // We use this to chain movements between off mesh links
+        public Vector3 EndPosition;
+
+        public GameObject StartSphere;
+        public GameObject EndSphere;
+
+        public bool StartWalk;
+
+        List<Coroutine> MoveRoutines = new List<Coroutine>();
 
         private void Awake()
         {
@@ -20,6 +28,12 @@ namespace Natureous
 
         public void GoToTarget()
         {
+            navMeshAgent.enabled = true;
+            StartSphere.transform.parent = null;
+            EndSphere.transform.parent = null;
+
+            StartWalk = false;
+
             navMeshAgent.isStopped = false;
 
             if (ShouldTargetPlayableCharacter)
@@ -29,12 +43,13 @@ namespace Natureous
 
             navMeshAgent.SetDestination(Target.transform.position);
 
-            if (MoveCoroutine != null)
+            if (MoveRoutines.Count != 0)
             {
-                StopCoroutine(MoveCoroutine);
+                StopCoroutine(MoveRoutines[0]);
+                MoveRoutines.RemoveAt(0);
             }
 
-            MoveCoroutine = StartCoroutine(Move());
+            MoveRoutines.Add(StartCoroutine(Move()));
         }
 
         IEnumerator Move()
@@ -43,8 +58,31 @@ namespace Natureous
             {
                 if (navMeshAgent.isOnOffMeshLink)
                 {
+                    StartPosition = transform.position;
+                    StartSphere.transform.position = transform.position;
                     navMeshAgent.CompleteOffMeshLink();
+
+                    yield return new WaitForEndOfFrame();
+
+                    EndPosition = transform.position;
+                    EndSphere.transform.position = transform.position;
                     navMeshAgent.isStopped = true;
+                    StartWalk = true;
+                    yield break;
+                }
+
+                Vector3 dist = transform.position - navMeshAgent.destination;
+                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                {
+                    StartPosition = transform.position;
+                    StartSphere.transform.position = transform.position;
+
+                    EndPosition = transform.position;
+                    EndSphere.transform.position = transform.position;
+
+                    navMeshAgent.isStopped = true;
+
+                    StartWalk = true;
                     yield break;
                 }
 

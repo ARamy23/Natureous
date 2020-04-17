@@ -44,7 +44,7 @@ namespace Natureous
         {
             if(characterController == null)
             {
-                characterController = animator.GetComponentInParent<CharacterControl>();
+                characterController = animator.transform.root.GetComponent<CharacterControl>();
             }
             
             return characterController;

@@ -42,6 +42,8 @@ namespace Natureous
         public List<GameObject> FrontSpheres = new List<GameObject>();
         public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>();
 
+        public AIProgress AIProgress;
+
         public Material material;
 
         private List<TriggerDetector> TriggerDetectors = new List<TriggerDetector>();
@@ -73,6 +75,7 @@ namespace Natureous
         private void Awake()
         {
             animationProgress = GetComponent<AnimationProgress>();
+            AIProgress = GetComponentInChildren<AIProgress>();
             ChangeFacingDirection(IsFacingRight: IsFacingRightDirection());
             SetupColliderSpheres();
             RegisterCharacter();

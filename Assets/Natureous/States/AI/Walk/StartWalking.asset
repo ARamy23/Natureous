@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28306861af91b4642be7ea46776dfd14, type: 3}
-  m_Name: Player_Jump
+  m_Script: {fileID: 11500000, guid: 5c479f36a291e48f1bedff572828383a, type: 3}
+  m_Name: StartWalking
   m_EditorClassIdentifier: 
-  JumpForce: 350

@@ -10,41 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3ae28e8c975c44a39b0964f4c509c74, type: 3}
-  m_Name: Player_Uppercut_Prep_MoveForward
+  m_Name: General_MoveForward
   m_EditorClassIdentifier: 
-  Constant: 1
+  AllowEarlyTurn: 1
+  LockDirection: 0
+  Constant: 0
   SpeedGraph:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.3550037
-      outSlope: -0.3550037
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.74023813
-      value: 0.7372127
-      inSlope: -1.322433
-      outSlope: -1.322433
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.14458257
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8
-      value: 0
-      inSlope: -12.335835
-      outSlope: -12.335835
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Speed: 1.1
+  Speed: 1.8
   BlockDistance: 0.1
+  UseMomentum: 0
+  MaxMomentum: 0
+  ShouldClearMomentum: 0
+  StartingMomentum: 0
