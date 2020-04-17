@@ -63,7 +63,6 @@ namespace Natureous
                     navMeshAgent.CompleteOffMeshLink();
 
                     yield return new WaitForEndOfFrame();
-
                     EndPosition = transform.position;
                     EndSphere.transform.position = transform.position;
                     navMeshAgent.isStopped = true;

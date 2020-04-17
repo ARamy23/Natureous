@@ -8,6 +8,7 @@ namespace Natureous
     enum AIWalkTransition
     {
         StartWalking,
+        JumpPlatform,
     }
 
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AI/StartWalking")]
@@ -27,18 +28,23 @@ namespace Natureous
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 direction = control.AIProgress.pathFindingAgent.StartPosition - control.transform.position;
+            Vector3 dist = control.AIProgress.pathFindingAgent.StartPosition - control.transform.position;
 
-            if (Vector3.SqrMagnitude(direction) < 0.5f)
+            if (Vector3.SqrMagnitude(dist) < 1.2f)
             {
                 control.MoveRight = false;
                 control.MoveLeft = false;
+            
+                if (control.AIProgress.pathFindingAgent.StartSphere.transform.position.y < control.AIProgress.pathFindingAgent.EndSphere.transform.position.y)
+                {
+                    animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), true);
+                }
             }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
-
+            animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), false);
         }
     }
 }
