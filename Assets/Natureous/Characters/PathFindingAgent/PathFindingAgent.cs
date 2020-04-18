@@ -56,6 +56,7 @@ namespace Natureous
         {
             while (true)
             {
+                
                 if (navMeshAgent.isOnOffMeshLink)
                 {
                     StartSphere.transform.position = navMeshAgent.currentOffMeshLinkData.startPos;
@@ -68,8 +69,9 @@ namespace Natureous
                     yield break;
                 }
 
-                Vector3 dist = transform.position - navMeshAgent.destination;
-                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                Vector3 distanceToTarget = transform.position - navMeshAgent.destination;
+                float distance = Vector3.SqrMagnitude(distanceToTarget);
+                if (distance < 1.1f)
                 {
                     StartSphere.transform.position = navMeshAgent.destination;
 

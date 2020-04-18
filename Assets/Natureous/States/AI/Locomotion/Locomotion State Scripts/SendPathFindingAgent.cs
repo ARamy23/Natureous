@@ -26,7 +26,6 @@ namespace Natureous
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-
             if (control.AIProgress.pathFindingAgent.StartWalk)
             {
                 animator.SetBool(AIWalkTransition.StartWalking.ToString(), true);
