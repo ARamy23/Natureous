@@ -54,6 +54,14 @@ namespace Natureous
                 {
                     control.MoveRight = false;
                     control.MoveLeft = false;
+
+                    Vector3 distanceToPlayer = control.transform.position - CharacterManager.Instance.GetPlayableCharacter().transform.position;
+
+                    if (Vector3.SqrMagnitude(distanceToPlayer) > 1f)
+                    {
+                        animator.gameObject.SetActive(false);
+                        animator.gameObject.SetActive(true);
+                    }
                 }
             }
         }
@@ -61,6 +69,8 @@ namespace Natureous
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), false);
+            animator.SetBool(AIWalkTransition.FallPlatform.ToString(), false);
+
         }
     }
 }
