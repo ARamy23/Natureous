@@ -36,15 +36,15 @@ namespace Natureous
 
         public AnimationProgress animationProgress;
         public LedgeChecker LedgeChecker;
+        public DamageDetector damageDetector;
+        public AIProgress AIProgress;
+        public Material material;
+
 
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
         public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>();
-
-        public AIProgress AIProgress;
-
-        public Material material;
 
         private List<TriggerDetector> TriggerDetectors = new List<TriggerDetector>();
         private Dictionary<string, GameObject> ChildObjects = new Dictionary<string, GameObject>();
@@ -54,7 +54,7 @@ namespace Natureous
         
         private Rigidbody rigid;
 
-        [Header("Setup")]
+        [Header("Setup Externally")]
         public PlayableCharacterType playableCharacterType;
         public Animator SkinnedMeshAnimator;
         public List<Collider> RagdollParts = new List<Collider>();
@@ -76,6 +76,7 @@ namespace Natureous
         {
             animationProgress = GetComponent<AnimationProgress>();
             AIProgress = GetComponentInChildren<AIProgress>();
+            damageDetector = GetComponentInChildren<DamageDetector>();
             ChangeFacingDirection(IsFacingRight: IsFacingRightDirection());
             SetupColliderSpheres();
             RegisterCharacter();

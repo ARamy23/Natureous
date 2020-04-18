@@ -29,13 +29,13 @@ namespace Natureous
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 dist = control.AIProgress.pathFindingAgent.StartSphere.transform.position - control.transform.position;
+            Vector3 distanceToStartSphere = control.AIProgress.pathFindingAgent.StartSphere.transform.position - control.transform.position;
             var startSpehereYPosition = control.AIProgress.pathFindingAgent.StartSphere.transform.position.y;
             var endSphereYPosition = control.AIProgress.pathFindingAgent.EndSphere.transform.position.y;
             // Jump
             if (startSpehereYPosition < endSphereYPosition)
             {
-                if (Vector3.SqrMagnitude(dist) < 0.01f)
+                if (Vector3.SqrMagnitude(distanceToStartSphere) < 0.01f)
                 {
                     control.MoveRight = false;
                     control.MoveLeft = false;
@@ -48,9 +48,9 @@ namespace Natureous
                 animator.SetBool(AIWalkTransition.FallPlatform.ToString(), true);
             }
 
-            if (startSpehereYPosition == endSphereYPosition) // on the same platform
+            if (startSpehereYPosition.Equals(endSphereYPosition)) // on the same platform
             {
-                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                if (Vector3.SqrMagnitude(distanceToStartSphere) < 0.5f)
                 {
                     control.MoveRight = false;
                     control.MoveLeft = false;
@@ -62,6 +62,15 @@ namespace Natureous
                         animator.gameObject.SetActive(false);
                         animator.gameObject.SetActive(true);
                     }
+                    else // Temporary
+                    {
+                        if (CharacterManager.Instance.GetPlayableCharacter().damageDetector.DamageTaken != 0) return;
+                        var isMovingRight = control.IsFacingRightDirection();
+                        control.MoveRight = isMovingRight;
+                        control.MoveLeft = !isMovingRight;
+                        control.Attack = true;
+                    }
+
                 }
             }
         }
