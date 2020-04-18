@@ -33,6 +33,23 @@ namespace Natureous
 
             return null;
         }
+
+        public CharacterControl GetPlayableCharacter()
+        {
+            foreach (CharacterControl control in Characters)
+            {
+                var manualInput = control.GetComponent<ManualInput>();
+                var isControlledByAPlayer = manualInput != null && manualInput.enabled;
+
+                if (isControlledByAPlayer)
+                {
+                    return control;
+                }
+                
+            }
+
+            return null;
+        }
     }
 }
 
