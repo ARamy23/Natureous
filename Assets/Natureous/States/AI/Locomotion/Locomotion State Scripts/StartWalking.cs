@@ -15,6 +15,8 @@ namespace Natureous
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AI/StartWalking")]
     public class StartWalking : StateData
     {
+        CharacterControl player;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
@@ -24,6 +26,8 @@ namespace Natureous
 
             control.MoveRight = isMovingForward;
             control.MoveLeft = !isMovingForward;
+
+            player = CharacterManager.Instance.GetPlayableCharacter();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -32,21 +36,6 @@ namespace Natureous
             Vector3 distanceToStartSphere = control.AIProgress.pathFindingAgent.StartSphere.transform.position - control.transform.position;
             var startSpehereYPosition = control.AIProgress.pathFindingAgent.StartSphere.transform.position.y;
             var endSphereYPosition = control.AIProgress.pathFindingAgent.EndSphere.transform.position.y;
-            // Jump
-            if (startSpehereYPosition < endSphereYPosition)
-            {
-                if (Vector3.SqrMagnitude(distanceToStartSphere) < 0.01f)
-                {
-                    control.MoveRight = false;
-                    control.MoveLeft = false;
-                    animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), true);
-                }
-            }
-
-            if (startSpehereYPosition > endSphereYPosition) // fall
-            {
-                animator.SetBool(AIWalkTransition.FallPlatform.ToString(), true);
-            }
 
             if (startSpehereYPosition.Equals(endSphereYPosition)) // on the same platform
             {
@@ -55,7 +44,7 @@ namespace Natureous
                     control.MoveRight = false;
                     control.MoveLeft = false;
 
-                    Vector3 distanceToPlayer = control.transform.position - CharacterManager.Instance.GetPlayableCharacter().transform.position;
+                    Vector3 distanceToPlayer = control.transform.position - player.transform.position;
 
                     if (Vector3.SqrMagnitude(distanceToPlayer) > 1f)
                     {
@@ -73,6 +62,24 @@ namespace Natureous
 
                 }
             }
+
+            // Jump
+            if (startSpehereYPosition < endSphereYPosition)
+            {
+                if (Vector3.SqrMagnitude(distanceToStartSphere) < 0.01f)
+                {
+                    control.MoveRight = false;
+                    control.MoveLeft = false;
+                    animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), true);
+                }
+            }
+
+            if (startSpehereYPosition > endSphereYPosition) // fall
+            {
+                animator.SetBool(AIWalkTransition.FallPlatform.ToString(), true);
+            }
+
+            
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)

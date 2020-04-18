@@ -9,7 +9,7 @@ namespace Natureous
         private CharacterControl player;
         private bool isSpawned = false;
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             player = CharacterManager.Instance.GetPlayableCharacter();
         }
@@ -17,7 +17,7 @@ namespace Natureous
         // Update is called once per frame
         void Update()
         {
-            if (player == null && !isSpawned) return;
+            if (player == null || isSpawned) return;
             SpawnEnemyIfNeeded();
         }
 

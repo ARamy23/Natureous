@@ -40,7 +40,6 @@ namespace Natureous
         public AIProgress AIProgress;
         public Material material;
 
-
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
@@ -81,7 +80,7 @@ namespace Natureous
             SetupColliderSpheres();
             RegisterCharacter();
         }
-
+        
         public void SetRagdolParts()
         {
             RagdollParts.Clear();
@@ -268,6 +267,7 @@ namespace Natureous
                 child.gameObject.SetActive(true);
             }
             Rigidbody.useGravity = true;
+            AIProgress = GetComponentInChildren<AIProgress>();
         }
     }
 }

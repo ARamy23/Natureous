@@ -8,6 +8,9 @@ namespace Natureous
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AI/JumpPlatform")]
     public class JumpPlatform : StateData
     {
+
+        private CharacterControl player;
+
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
@@ -17,6 +20,7 @@ namespace Natureous
             var shouldFaceRightDirection = control.AIProgress.pathFindingAgent.StartSphere.transform.position.z < control.AIProgress.pathFindingAgent.EndSphere.transform.position.z;
 
             control.ChangeFacingDirection(IsFacingRight: shouldFaceRightDirection);
+            player = CharacterManager.Instance.GetPlayableCharacter();
         }
 
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
@@ -45,6 +49,17 @@ namespace Natureous
                 animator.gameObject.SetActive(true);
             }
 
+            var isPlayerOnTheSamePlatform = control.transform.position.y == player.transform.position.y;
+            if (isPlayerOnTheSamePlatform)
+            {
+                control.MoveRight = false;
+                control.MoveLeft = false;
+                control.MoveUp = false;
+                control.Jump = false;
+
+                animator.gameObject.SetActive(false);
+                animator.gameObject.SetActive(true);
+            }
         }
 
         public override void OnExit(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
