@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 7d011bf251bf2413f866856577dd21ad,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -504,7 +504,7 @@ PrefabInstance:
     - target: {fileID: 5399424601673029481, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_Name
-      value: Running Hammer Down Attack (2)
+      value: End Hint
       objectReference: {fileID: 0}
     - target: {fileID: 5399424601673029485, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -731,6 +731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -1790,6 +1795,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791788
       objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -2056,22 +2066,22 @@ PrefabInstance:
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 112
+      value: 127
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 20
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 20
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -2081,16 +2091,27 @@ PrefabInstance:
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_text
-      value: 'This is an enemy, attack him with ''J'' button while moving, sprinting
-        or while standing
+      value: 'This is an enemy
+
+        Attack him with ''J'' button
 
 
-        beat the crab outta him!'
+        you
+        can attack while moving, sprinting or while standing
+
+
+        BEAT THE CRAB
+        OUTTA HIM!'
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_fontSize
-      value: 119.25
+      value: 85.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5399424601673029481, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -2304,6 +2325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -2550,6 +2576,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -2838,6 +2869,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
       objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -3016,7 +3052,7 @@ PrefabInstance:
     - target: {fileID: 2040755274300849748, guid: 96d5c22701b814153b5c0851be9e358d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -63.4
       objectReference: {fileID: 0}
     - target: {fileID: 2040755274300849748, guid: 96d5c22701b814153b5c0851be9e358d,
         type: 3}
@@ -3197,22 +3233,22 @@ PrefabInstance:
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 78
+      value: 94
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -3222,8 +3258,8 @@ PrefabInstance:
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_text
-      value: "Try a running attack, you will be amazed by the power of your Thor's
-        hammer! \U0001F602"
+      value: "Try a Sprinting + Holding 'J' attack, you will be amazed by the power
+        of your Thor's hammer! \U0001F602"
       objectReference: {fileID: 0}
     - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -3235,6 +3271,16 @@ PrefabInstance:
       propertyPath: m_textInfo.materialCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
+        type: 3}
+      propertyPath: m_subTextObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1611511977}
+    - target: {fileID: 5399424600243941568, guid: e633c3d743f764c27aa933bbe138e464,
+        type: 3}
+      propertyPath: m_subTextObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 2010171326}
     - target: {fileID: 5399424601673029481, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_Name
@@ -4359,7 +4405,7 @@ PrefabInstance:
     - target: {fileID: 7055710856506702132, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026496276
+      value: -63.4265
       objectReference: {fileID: 0}
     - target: {fileID: 7055710856506702133, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
@@ -4399,7 +4445,7 @@ PrefabInstance:
     - target: {fileID: 7055710857673093942, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026496276
+      value: -63.326496
       objectReference: {fileID: 0}
     - target: {fileID: 7055710857673093942, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
@@ -4459,7 +4505,7 @@ PrefabInstance:
     - target: {fileID: 7055710857880282613, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026496276
+      value: -63.4265
       objectReference: {fileID: 0}
     - target: {fileID: 7600567004654839399, guid: 538dddb38ba60459182bd8bceb8f3b7a,
         type: 3}
@@ -4772,6 +4818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -5292,7 +5343,7 @@ PrefabInstance:
     - target: {fileID: 5399424601673029481, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
       propertyPath: m_Name
-      value: Running Hammer Down Attack (1)
+      value: Discover Combos
       objectReference: {fileID: 0}
     - target: {fileID: 5399424601673029485, guid: e633c3d743f764c27aa933bbe138e464,
         type: 3}
@@ -5768,6 +5819,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
       objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -6071,6 +6127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -6439,6 +6500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
@@ -6881,6 +6947,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
       objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -7073,6 +7144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.00000034791785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967117744932209462, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
+        type: 3}
+      propertyPath: ShouldStartWalkOnSpawn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3445247669210465100, guid: 3ef52895fd6054f6dbf7aad5cee8658a,
         type: 3}
