@@ -256,5 +256,18 @@ namespace Natureous
 
             return null;
         }
+
+        public void ActivateAllComponents()
+        {
+            GetComponent<BoxCollider>().enabled = true;
+            GetComponent<Respawner>().enabled = true;
+            animationProgress.enabled = true;
+            damageDetector.enabled = true;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            Rigidbody.useGravity = true;
+        }
     }
 }

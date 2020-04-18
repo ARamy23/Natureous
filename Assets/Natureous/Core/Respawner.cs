@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Natureous.Core
+namespace Natureous
 {
     public class Respawner : MonoBehaviour
     {
