@@ -11,9 +11,6 @@ namespace Natureous
         public GameObject Target;
         NavMeshAgent navMeshAgent;
 
-        public Vector3 StartPosition; // We use this to chain movements between off mesh links
-        public Vector3 EndPosition;
-
         public GameObject StartSphere;
         public GameObject EndSphere;
 
@@ -58,13 +55,11 @@ namespace Natureous
             {
                 if (navMeshAgent.isOnOffMeshLink)
                 {
-                    StartPosition = transform.position;
-                    StartSphere.transform.position = transform.position;
-                    navMeshAgent.CompleteOffMeshLink();
+                    StartSphere.transform.position = navMeshAgent.currentOffMeshLinkData.startPos;
+                    EndSphere.transform.position = navMeshAgent.currentOffMeshLinkData.endPos;
 
-                    yield return new WaitForEndOfFrame();
-                    EndPosition = transform.position;
-                    EndSphere.transform.position = transform.position;
+                    navMeshAgent.CompleteOffMeshLink();
+                                        
                     navMeshAgent.isStopped = true;
                     StartWalk = true;
                     yield break;
@@ -73,11 +68,9 @@ namespace Natureous
                 Vector3 dist = transform.position - navMeshAgent.destination;
                 if (Vector3.SqrMagnitude(dist) < 0.5f)
                 {
-                    StartPosition = transform.position;
-                    StartSphere.transform.position = transform.position;
+                    StartSphere.transform.position = navMeshAgent.destination;
 
-                    EndPosition = transform.position;
-                    EndSphere.transform.position = transform.position;
+                    EndSphere.transform.position = navMeshAgent.destination;
 
                     navMeshAgent.isStopped = true;
 

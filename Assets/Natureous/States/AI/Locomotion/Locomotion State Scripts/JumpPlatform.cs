@@ -27,7 +27,7 @@ namespace Natureous
             float bottomDistance = control.AIProgress.pathFindingAgent.EndSphere.transform.position.y - control.FrontSpheres[0].transform.position.y;
 
 
-            if (topDistance < 3f && bottomDistance > 0.5f)
+            if (topDistance < 1.5f && bottomDistance > 0.5f)
             {
                 var isLookingForward = control.IsFacingRightDirection();
                 control.MoveRight = isLookingForward;
@@ -40,6 +40,9 @@ namespace Natureous
                 control.MoveLeft = false;
                 control.MoveUp = false;
                 control.Jump = false;
+
+                animator.gameObject.SetActive(false);
+                animator.gameObject.SetActive(true);
             }
 
         }

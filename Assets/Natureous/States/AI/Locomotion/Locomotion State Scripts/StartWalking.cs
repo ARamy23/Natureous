@@ -9,6 +9,7 @@ namespace Natureous
     {
         StartWalking,
         JumpPlatform,
+        FallPlatform,
     }
 
     [CreateAssetMenu(fileName = "New State", menuName = "Natureous/AI/StartWalking")]
@@ -17,7 +18,7 @@ namespace Natureous
         public override void OnEnter(CharacterState characterState, Animator animator, AnimatorStateInfo animatorStateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 direction = control.AIProgress.pathFindingAgent.StartPosition - control.transform.position;
+            Vector3 direction = control.AIProgress.pathFindingAgent.StartSphere.transform.position - control.transform.position;
 
             var isMovingForward = direction.z > 0f;
 
@@ -28,16 +29,31 @@ namespace Natureous
         public override void UpdateAbility(CharacterState characterState, Animator animator, AnimatorStateInfo stateInfo)
         {
             CharacterControl control = characterState.GetCharacterControl(animator);
-            Vector3 dist = control.AIProgress.pathFindingAgent.StartPosition - control.transform.position;
-
-            if (Vector3.SqrMagnitude(dist) < 1.2f)
+            Vector3 dist = control.AIProgress.pathFindingAgent.StartSphere.transform.position - control.transform.position;
+            var startSpehereYPosition = control.AIProgress.pathFindingAgent.StartSphere.transform.position.y;
+            var endSphereYPosition = control.AIProgress.pathFindingAgent.EndSphere.transform.position.y;
+            // Jump
+            if (startSpehereYPosition < endSphereYPosition)
             {
-                control.MoveRight = false;
-                control.MoveLeft = false;
-            
-                if (control.AIProgress.pathFindingAgent.StartSphere.transform.position.y < control.AIProgress.pathFindingAgent.EndSphere.transform.position.y)
+                if (Vector3.SqrMagnitude(dist) < 0.01f)
                 {
+                    control.MoveRight = false;
+                    control.MoveLeft = false;
                     animator.SetBool(AIWalkTransition.JumpPlatform.ToString(), true);
+                }
+            }
+
+            if (startSpehereYPosition > endSphereYPosition) // fall
+            {
+                animator.SetBool(AIWalkTransition.FallPlatform.ToString(), true);
+            }
+
+            if (startSpehereYPosition == endSphereYPosition) // on the same platform
+            {
+                if (Vector3.SqrMagnitude(dist) < 0.5f)
+                {
+                    control.MoveRight = false;
+                    control.MoveLeft = false;
                 }
             }
         }
