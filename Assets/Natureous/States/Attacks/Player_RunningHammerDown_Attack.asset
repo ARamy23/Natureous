@@ -18,5 +18,5 @@ MonoBehaviour:
   deathType: 2
   MustCollide: 0
   MustFaceTheAttacker: 1
-  LethalRange: 8
+  LethalRange: 20
   MaxHits: 100
