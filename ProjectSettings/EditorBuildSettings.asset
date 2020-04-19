@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Natureous/Scenes/Sandbox.unity
     guid: 2d57a8ce94ff4443b8ac4c9fb9b7a724
+  - enabled: 1
+    path: Assets/Natureous/Scenes/Game Over Scene.unity
+    guid: eac21f454787f4453b56466b5138eb63
   m_configObjects: {}
