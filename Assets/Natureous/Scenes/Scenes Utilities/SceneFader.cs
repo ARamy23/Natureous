@@ -14,12 +14,6 @@ namespace Natureous
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        IEnumerator FadeOutIn()
-        {
-            yield return FadeOut(1f);
-            yield return FadeIn(2f);
-        }
-
         public IEnumerator FadeOut(float duration)
         {
             while (canvasGroup.alpha < 1)

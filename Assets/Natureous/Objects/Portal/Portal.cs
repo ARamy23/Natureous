@@ -23,12 +23,22 @@ namespace Natureous
 
         private IEnumerator Transition()
         {
+            if (sceneToLoad < 0)
+            {
+                Debug.LogError("Scene to load not set.");
+                yield break;
+            }
+
+            DontDestroyOnLoad(gameObject);
+
             SceneFader fader = FindObjectOfType<SceneFader>();
 
             yield return fader.FadeOut(fadeOutTime);
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
+
+            Destroy(gameObject);
         }
 
         private bool isTheEnteringObjectThePlayer(Collider collider)
