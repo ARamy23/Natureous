@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Natureous
 {
@@ -106,6 +107,11 @@ namespace Natureous
                 CameraManager.Instance.ShakeCamera(duration: 0.5f);
 
             DamageTaken++;
+
+            if (character.GetComponent<ManualInput>().enabled)
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }
