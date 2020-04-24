@@ -22,7 +22,7 @@ namespace Natureous
 
         public void LogPlayerDied()
         {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "First Platform", "Demo Level", CheckpointManager.Instance.CurrentCheckpoint.gameObject.name + "-Died");
+            GameAnalytics.NewDesignEvent("First Platform - Demo Level - Player killed");
         }
 
         public void LogPlayerHasFallenIntoAbyss()
@@ -37,7 +37,7 @@ namespace Natureous
 
         public void LogPlayerKilledAnEnemy()
         {
-            GameAnalytics.NewDesignEvent("First Platform -> Demo Level -> Killed A Dummy");
+            GameAnalytics.NewDesignEvent("First Platform - Demo Level - Killed a Dummy");
         }
 
         public void GameOver()

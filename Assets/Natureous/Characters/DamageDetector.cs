@@ -111,6 +111,7 @@ namespace Natureous
             if (character.GetComponent<ManualInput>().enabled)
             {
                 AnalyticsManager.Instance.LogPlayerDied();
+                CharacterManager.Instance.Characters.Clear();
                 SceneManager.LoadScene(0);
             }
             else

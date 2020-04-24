@@ -53,7 +53,9 @@ namespace Natureous
                     }
                     else // Temporary
                     {
-                        if (CharacterManager.Instance.GetPlayableCharacter().damageDetector.DamageTaken != 0) return;
+                        var player = CharacterManager.Instance.GetPlayableCharacter();
+                        if (player == null) return;
+                        if (player.damageDetector.DamageTaken != 0) return;
                         var isMovingRight = control.IsFacingRightDirection();
                         control.MoveRight = isMovingRight;
                         control.MoveLeft = !isMovingRight;
