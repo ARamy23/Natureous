@@ -6,7 +6,22 @@ namespace Natureous
 {
     public class CheckpointManager : Singleton<CheckpointManager>
     {
-        public Checkpoint CurrentCheckpoint;
+        private Checkpoint currentCheckpoint;
+
+        public Checkpoint CurrentCheckpoint
+        {
+            get
+            {
+                return currentCheckpoint;
+            }
+
+            set
+            {
+                AnalyticsManager.Instance.LogReachedCheckpoint(value);
+                currentCheckpoint = value;
+            }
+        }
+
     }
 }
 
