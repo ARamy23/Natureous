@@ -13,31 +13,50 @@ namespace Natureous
         Landing,
         Grounded,
         Attack,
+        Sprint,
+        Turn,
+        TransitionIndex,
+    }
+
+    public enum PlayableCharacterType
+    {
+        None,
+        YBot,
     }
 
     public class CharacterControl : MonoBehaviour
     { 
-        public Animator SkinnedMeshAnimator;
+        public bool MoveUp;
+        public bool MoveDown;
         public bool MoveLeft;
         public bool MoveRight;
         public bool Jump;
         public bool Attack;
+        public bool Sprint;
+
+        public AnimationProgress animationProgress;
+        public LedgeChecker LedgeChecker;
+        public DamageDetector damageDetector;
+        public AIProgress AIProgress;
+        public Material material;
+
         public GameObject ColliderEdgePrefab;
         public List<GameObject> BottomSpheres = new List<GameObject>();
         public List<GameObject> FrontSpheres = new List<GameObject>();
-        public List<Collider> RagdollParts = new List<Collider>();
-        public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts =
-            new Dictionary<TriggerDetector, List<Collider>>();
-
-
-        public Material material;
+        public Dictionary<TriggerDetector, List<Collider>> CollidingBodyParts = new Dictionary<TriggerDetector, List<Collider>>();
 
         private List<TriggerDetector> TriggerDetectors = new List<TriggerDetector>();
+        private Dictionary<string, GameObject> ChildObjects = new Dictionary<string, GameObject>();
 
         public float GravityMultiplier;
         public float PullMultiplier;
         
         private Rigidbody rigid;
+
+        [Header("Setup Externally")]
+        public PlayableCharacterType playableCharacterType;
+        public Animator SkinnedMeshAnimator;
+        public List<Collider> RagdollParts = new List<Collider>();
 
         public Rigidbody Rigidbody
         {
@@ -46,7 +65,6 @@ namespace Natureous
                 if (rigid == null)
                 {
                     rigid = GetComponent<Rigidbody>();
-
                 }
 
                 return rigid;
@@ -55,10 +73,14 @@ namespace Natureous
 
         private void Awake()
         {
+            animationProgress = GetComponent<AnimationProgress>();
+            AIProgress = GetComponentInChildren<AIProgress>();
+            damageDetector = GetComponentInChildren<DamageDetector>();
             ChangeFacingDirection(IsFacingRight: IsFacingRightDirection());
             SetupColliderSpheres();
+            RegisterCharacter();
         }
-
+        
         public void SetRagdolParts()
         {
             RagdollParts.Clear();
@@ -200,6 +222,52 @@ namespace Natureous
                     renderer.material = material;
                 }
             }
+        }
+
+        private void RegisterCharacter()
+        {
+            if (!CharacterManager.Instance.Characters.Contains(this))
+            {
+                CharacterManager.Instance.Characters.Add(this);
+            }
+        }
+
+        public GameObject GetChildObject(string name)
+        {
+
+            if (ChildObjects.ContainsKey(name))
+            {
+                return ChildObjects[name];
+            }
+
+            Transform[] transforms = this.gameObject.GetComponentsInChildren<Transform>();
+
+            foreach (var transform in transforms)
+            {
+                if (transform.gameObject.name.Equals(name))
+                {
+                    var foundGameObject = transform.gameObject;
+                    ChildObjects.Add(name, foundGameObject);
+                    return foundGameObject;
+
+                }
+            }
+
+            return null;
+        }
+
+        public void ActivateAllComponents()
+        {
+            GetComponent<BoxCollider>().enabled = true;
+            GetComponent<Respawner>().enabled = true;
+            animationProgress.enabled = true;
+            damageDetector.enabled = true;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            Rigidbody.useGravity = true;
+            AIProgress = GetComponentInChildren<AIProgress>();
         }
     }
 }

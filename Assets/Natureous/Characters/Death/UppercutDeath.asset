@@ -15,4 +15,4 @@ MonoBehaviour:
   GeneralBodyParts: 
   Animator: {fileID: 9100000, guid: d3e3d6a0062e54f2f88a56b7c464923c, type: 2}
   IsFacingAttacker: 0
-  LaunchIntoAir: 1
+  deathType: 1

@@ -11,5 +11,7 @@ namespace Natureous
         public bool Jump;
         public bool Attack;
         public bool Sprint;
+        public bool MoveUp;
+        public bool MoveDown;
     }
 }

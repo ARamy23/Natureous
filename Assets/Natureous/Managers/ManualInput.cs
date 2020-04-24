@@ -21,6 +21,9 @@ namespace Natureous
             characterControl.MoveLeft = VirtualInputManager.Instance.MoveLeft;
             characterControl.Jump = VirtualInputManager.Instance.Jump;
             characterControl.Attack = VirtualInputManager.Instance.Attack;
+            characterControl.Sprint = VirtualInputManager.Instance.Sprint;
+            characterControl.MoveUp = VirtualInputManager.Instance.MoveUp;
+            characterControl.MoveDown = VirtualInputManager.Instance.MoveDown;
         }
     }
 }
