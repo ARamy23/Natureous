@@ -19,6 +19,7 @@ namespace Natureous
                     _instance = obj.AddComponent<T>();
                     obj.name = typeof(T).ToString();
                 }
+                DontDestroyOnLoad(_instance);
                 return _instance;
             }
         }

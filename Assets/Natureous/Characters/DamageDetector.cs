@@ -110,7 +110,12 @@ namespace Natureous
 
             if (character.GetComponent<ManualInput>().enabled)
             {
+                AnalyticsManager.Instance.LogPlayerDied();
                 SceneManager.LoadScene(0);
+            }
+            else
+            {
+                AnalyticsManager.Instance.LogPlayerKilledAnEnemy();
             }
         }
     }

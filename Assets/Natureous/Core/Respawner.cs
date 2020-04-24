@@ -10,7 +10,10 @@ namespace Natureous
 
         bool IsFallingIntoTheAbyss()
         {
-            return this.gameObject.transform.position.y < -20;
+            var isFallingIntoAbyss = this.gameObject.transform.position.y < -20;
+            if (isFallingIntoAbyss)
+                AnalyticsManager.Instance.LogPlayerHasFallenIntoAbyss();
+            return isFallingIntoAbyss;
         }
 
         public void Respawn()
