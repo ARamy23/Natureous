@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SmartlookUnity;
 using GameAnalyticsSDK;
 using GameAnalyticsSDK.Events;
 
@@ -11,6 +12,7 @@ namespace Natureous
         private void Awake()
         {
             GameAnalytics.Initialize();
+            Smartlook.SetupAndStartRecording("7c105a30a5e7c648c52013fd05fed03a5d2f3f0d");
         }
 
         public void LogReachedCheckpoint(Checkpoint checkpoint)
