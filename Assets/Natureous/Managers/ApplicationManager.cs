@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Natureous
 {
@@ -9,6 +10,7 @@ namespace Natureous
         private void Awake()
         {
             Application.targetFrameRate = 60;
+            SceneManager.LoadScene(1);
         }
     }
 }
