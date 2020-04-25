@@ -26,6 +26,7 @@ namespace Natureous
             if (control.Attack)
             {
                 PressTime += Time.deltaTime;
+                
             }
             else
             {
@@ -39,6 +40,7 @@ namespace Natureous
             else if (PressTime > MaxPressTime)
             {
                 AttackTriggered = false;
+                PressTime = 0f;
             }
             else
             {

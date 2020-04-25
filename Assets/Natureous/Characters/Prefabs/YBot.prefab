@@ -3764,11 +3764,13 @@ MonoBehaviour:
   Sprint: 0
   animationProgress: {fileID: 0}
   LedgeChecker: {fileID: 1059462755}
+  damageDetector: {fileID: 0}
+  AIProgress: {fileID: 0}
+  material: {fileID: 0}
   ColliderEdgePrefab: {fileID: 4689534388930112351, guid: 907fbe2fb3cc04fc786630fe544ddc7e,
     type: 3}
   BottomSpheres: []
   FrontSpheres: []
-  material: {fileID: 0}
   GravityMultiplier: 0
   PullMultiplier: 0
   playableCharacterType: 0
@@ -3878,7 +3880,7 @@ MonoBehaviour:
   isShakingCamera: 0
   PoolObjectList: 
   AttackTriggered: 0
-  MaxPressTime: 0.1
+  MaxPressTime: 0.45
 --- !u!1 &8970999956304649931
 GameObject:
   m_ObjectHideFlags: 0
