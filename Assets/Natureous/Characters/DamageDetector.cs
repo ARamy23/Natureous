@@ -95,6 +95,7 @@ namespace Natureous
         private void TakeDamage(AttackInfo attack)
         {
             if (DamageTaken > 0) return;
+            var previousAnimator = character.SkinnedMeshAnimator.runtimeAnimatorController;
             character.SkinnedMeshAnimator.runtimeAnimatorController = DeathAnimationsManager.Instance.GetAnimator(DamagedBodyPart, attack);
 
             attack.CurrentHits++;
@@ -111,8 +112,8 @@ namespace Natureous
             if (character.GetComponent<ManualInput>().enabled)
             {
                 AnalyticsManager.Instance.LogPlayerDied();
-                CharacterManager.Instance.Characters.Clear();
-                SceneManager.LoadScene(0);
+                character.GetComponent<Respawner>().RespawnPlayer(previousAnimator);
+                
             }
             else
             {
