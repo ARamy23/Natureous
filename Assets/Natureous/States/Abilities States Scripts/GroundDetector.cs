@@ -50,7 +50,8 @@ namespace Natureous
                     {
                         if (!character.RagdollParts.Contains(hit.collider)
                             && !Ledge.IsLedge(hit.collider.gameObject)
-                            && !Ledge.IsLedgeChecker(hit.collider.gameObject))
+                            && !Ledge.IsLedgeChecker(hit.collider.gameObject)
+                            && !Ledge.IsCharacter(hit.collider.gameObject))
                             return true;
                     }
                 }

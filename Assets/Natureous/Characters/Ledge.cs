@@ -19,6 +19,11 @@ namespace Natureous
         {
             return gameObject.GetComponent<LedgeChecker>() != null;
         }
+
+        internal static bool IsCharacter(GameObject gameObject)
+        {
+            return gameObject.transform.root.GetComponent<CharacterControl>() != null;
+        }
     }
 }
 
