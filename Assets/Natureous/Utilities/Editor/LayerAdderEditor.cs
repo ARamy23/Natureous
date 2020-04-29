@@ -36,6 +36,7 @@ namespace Natureous
                 }
 
                 Physics.IgnoreLayerCollision(dic["Default"], dic["Default"], false);
+                Physics.IgnoreLayerCollision(dic[NatureousLayer.Character.ToString()], dic["Default"], false);
 
                 Debug.Log("default collisions set");
             }
@@ -74,7 +75,7 @@ namespace Natureous
             }
         }
 
-        Dictionary<string, int> GetAllLayers()
+        public static Dictionary<string, int> GetAllLayers()
         {
             SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
             SerializedProperty layers = tagManager.FindProperty("layers");
