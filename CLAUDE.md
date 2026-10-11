@@ -13,11 +13,15 @@ Natureous — 2.5D action-adventure / hack-and-slash game in Unity (desktop + mo
 
 ## Toolchain
 
-- Unity **2019.3.5f1** (`ProjectSettings/ProjectVersion.txt`), URP 7.1.8, Cinemachine, TextMeshPro, Unity Test Framework 1.1.11 (no tests or asmdefs exist yet).
-- SDKs in `Assets/`: GameAnalytics, Smartlook, AppCenter, Play Services Resolver, Joystick Pack (mobile controls).
-- No CLI build/test scripts. Typical headless commands (adjust Unity path):
-  - Tests: `/Applications/Unity/Hub/Editor/2019.3.5f1/Unity.app/Contents/MacOS/Unity -batchmode -projectPath . -runTests -testPlatform EditMode -testResults results.xml` (single test: add `-testFilter <FullTestName>`)
-  - Compile check: same binary with `-batchmode -quit -projectPath . -logFile -`
+- Unity **6000.6.5f1** (Unity 6.6, arm64), migrated from 2019.3 in 2026-10 (see `docs/feature/unity6-migration/spike/findings.md`). URP 17.6, Cinemachine 6.6, Timeline 6.6, uGUI 2.6 (includes TextMeshPro), Unity Test Framework 1.8.
+- SDKs in `Assets/`: Smartlook, AppCenter (service shut down; unused by our code), Play Services Resolver, Joystick Pack. **GameAnalytics was removed**; its calls in `AnalyticsManager` are commented out, call sites kept for a replacement.
+- Editor binary: `/Applications/Unity/Hub/Editor/6000.6.5f1/Unity.app/Contents/MacOS/Unity` (`$U` below). Unity CLI: `~/.unity/bin/unity` (not on PATH).
+  - PlayMode tests: `$U -batchmode -projectPath . -runTests -testPlatform PlayMode -testResults results.xml -logFile test.log` (single test: add `-testFilter <FullTestName>`; EditMode: `-testPlatform EditMode`)
+  - Compile check: `$U -batchmode -quit -projectPath . -logFile -`, then grep the log for `error CS` and "Scripts have compiler errors"
+  - `unity test --mode PlayMode .` also works, but needs the macOS keychain prompt allowed once
+  - Measured: cold open ~49 s, warm open ~21 s, boot smoke test ~13 s
+- Tests: `Assets/Tests/PlayMode/` (`Natureous.Tests.PlayMode` asmdef). Game code has no asmdef, so tests reach it by type name via reflection. Don't list the test runner in both `references` and `optionalUnityReferences` of a test asmdef ("duplicate references" aborts compilation with no `error CS` line).
+- Change scenes, prefabs and assets through editor scripts (see `Assets/Editor/Migration/`) run with `-executeMethod`, never by hand-editing their YAML.
 - Always commit `.meta` files alongside assets; never hand-edit GUIDs.
 
 ## Scenes & boot
@@ -37,8 +41,12 @@ Gameplay logic is driven by the **Animator state machine**, not MonoBehaviour Up
 - Input: `KeyboardInput` / `MobileInput` → `VirtualInputManager` (singleton) → `ManualInput` copies into the player's `CharacterControl`. AI characters are driven by `AIProgress` + `PathFindingAgent` instead.
 - Combat: `Attack` state data pulls a pooled `AttackInfo` from `PoolManager` and registers it in `AttackManager.CurrentAttacks`; `DamageDetector` on targets matches attacks against ragdoll-part `TriggerDetector`s, swaps in a death animator from `DeathAnimationsManager`, shakes camera via `CameraManager`.
 - Level flow: `Checkpoint` → `CheckpointManager.CurrentCheckpoint`; `Respawner` respawns at it (and on abyss falls); `PlayerDetector` spawns enemies; `Portal` ends level; `SceneFader` handles transitions.
-- `AnalyticsManager` wraps GameAnalytics + Smartlook; gameplay events (checkpoint, death, abyss fall, kill, game over, survey) go through it.
-- `Singleton<T>` calls `FindObjectOfType` on every `Instance` access and auto-creates a GameObject if missing — cache references in hot paths.
+- `AnalyticsManager` wraps Smartlook (GameAnalytics calls commented out); gameplay events (checkpoint, death, abyss fall, kill, game over, survey) go through it.
+- `Singleton<T>` caches its instance (looked up once with `FindAnyObjectByType`, again only if destroyed), auto-creates a GameObject if missing, and marks it `DontDestroyOnLoad`.
 - Pooling: `PoolManager` / `PoolObject` / `PoolObjectLoader`, prefabs loaded from `Resources` by `PoolObjectType` name.
 
-Third-party content — don't modify: `AppCenter*/`, `GameAnalytics/`, `Smartlook/`, `Joystick Pack/`, `PlayServicesResolver/`, `Plugins/`, `Roundbeargames_Tutorial/` (tutorial series the architecture follows).
+Third-party content — don't modify: `AppCenter*/`, `Smartlook/`, `Joystick Pack/`, `PlayServicesResolver/`, `Plugins/`, `Roundbeargames_Tutorial/` (tutorial series the architecture follows).
+
+## Known issues and decisions
+
+Technical decisions, confirmed bugs and the agreed direction live in `docs/feature/tech-decisions/spike/` (start with `wave-decisions.md`). Don't fix the gameplay-changing bugs listed there (squared `LethalRange`, grounded at jump apex, shared `Attack` asset state, per-attack `MaxHits`) without the owner's sign-off.
