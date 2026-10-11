@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SmartlookUnity;
-using GameAnalyticsSDK;
-using GameAnalyticsSDK.Events;
 
 namespace Natureous
 {
@@ -11,18 +9,17 @@ namespace Natureous
     {
         private void Awake()
         {
-            GameAnalytics.Initialize();
             Smartlook.SetupAndStartRecording("7c105a30a5e7c648c52013fd05fed03a5d2f3f0d");
         }
 
         public void LogReachedCheckpoint(Checkpoint checkpoint)
         {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "First Platform", "Demo Level", checkpoint.transform.root.gameObject.name);
+            Debug.Log("[analytics] progression Complete " + string.Join("/", new object[] { "First Platform", "Demo Level", checkpoint.transform.root.gameObject.name }));
         }
 
         public void LogPlayerDied()
         {
-            GameAnalytics.NewDesignEvent("First Platform - Demo Level - Player killed");
+            Debug.Log("[analytics] design " + "First Platform - Demo Level - Player killed");
         }
 
         public void LogPlayerHasFallenIntoAbyss()
@@ -30,29 +27,29 @@ namespace Natureous
             Checkpoint checkpoint = CheckpointManager.Instance.CurrentCheckpoint;
             if (checkpoint != null)
             {
-                GameAnalytics.NewProgressionEvent(GAProgressionStatus.Fail, "First Platform", "Demo Level", checkpoint.gameObject.name + "-Fell");
+                Debug.Log("[analytics] progression Fail " + string.Join("/", new object[] { "First Platform", "Demo Level", checkpoint.gameObject.name + "-Fell" }));
             }
             
         }
 
         public void LogPlayerKilledAnEnemy()
         {
-            GameAnalytics.NewDesignEvent("First Platform - Demo Level - Killed a Dummy");
+            Debug.Log("[analytics] design " + "First Platform - Demo Level - Killed a Dummy");
         }
 
         public void GameOver()
         {
-            GameAnalytics.NewProgressionEvent(GAProgressionStatus.Complete, "First Platform", "Demo Level", "Game Over");
+            Debug.Log("[analytics] progression Complete " + string.Join("/", new object[] { "First Platform", "Demo Level", "Game Over" }));
         }
 
         public void OpenedSurvey()
         {
-            GameAnalytics.NewDesignEvent("Survey Opened");
+            Debug.Log("[analytics] design " + "Survey Opened");
         }
 
         public void IgnoredSurvey()
         {
-            GameAnalytics.NewDesignEvent("Survey Ignored");
+            Debug.Log("[analytics] design " + "Survey Ignored");
         }
     }
 }

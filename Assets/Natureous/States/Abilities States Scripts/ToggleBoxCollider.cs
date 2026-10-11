@@ -36,7 +36,7 @@ namespace Natureous
 
         private void HandleTogglingBoxCollider(CharacterControl control)
         {
-            control.Rigidbody.velocity = Vector3.zero;
+            control.Rigidbody.linearVelocity = Vector3.zero;
             control.GetComponent<BoxCollider>().enabled = IsEnabled;
         }
     }

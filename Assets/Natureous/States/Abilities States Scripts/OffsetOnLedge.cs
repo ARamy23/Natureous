@@ -15,7 +15,7 @@ namespace Natureous
             anim.transform.parent = control.LedgeChecker.GrabbedLedge.transform;
             anim.transform.localPosition = control.LedgeChecker.GrabbedLedge.Offset;
 
-            control.Rigidbody.velocity = Vector3.zero;
+            control.Rigidbody.linearVelocity = Vector3.zero;
         }
 
         public override void OnExit(CharacterState characterStateBase, Animator animator, AnimatorStateInfo animatorStateInfo)
