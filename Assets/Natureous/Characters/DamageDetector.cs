@@ -54,8 +54,12 @@ namespace Natureous
                     }
                 }
 
-                if (attack.MustCollide && DidCollide(attack))
-                    TakeDamage(attack);
+                if (attack.MustCollide)
+                {
+                    // A contact-only attack that missed must not fall back to the distance check.
+                    if (DidCollide(attack))
+                        TakeDamage(attack);
+                }
                 else
                 {
                     float distanceFromEnemies = Vector3.SqrMagnitude(this.gameObject.transform.position - attack.Attacker.transform.position);

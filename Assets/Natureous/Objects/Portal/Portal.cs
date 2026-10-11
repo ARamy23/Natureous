@@ -31,7 +31,7 @@ namespace Natureous
 
             DontDestroyOnLoad(gameObject);
 
-            SceneFader fader = FindObjectOfType<SceneFader>();
+            SceneFader fader = FindAnyObjectByType<SceneFader>();
 
             yield return fader.FadeOut(fadeOutTime);
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
