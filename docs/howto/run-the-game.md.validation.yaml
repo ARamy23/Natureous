@@ -1,0 +1,30 @@
+---
+type: How-to
+type_purity_score: 0.93
+collapse_check: clean
+sources:
+  - CLAUDE.md Toolchain section
+  - ProjectSettings/EditorBuildSettings.asset
+  - Assets/Natureous/Scenes/_preload.unity
+  - Code: InputDevices/, Managers/ApplicationManager.cs
+verdict: approved
+
+checklist:
+  clear_goal_stated: true
+  assumes_fundamentals_known: true
+  single_task_focus: true
+  ends_with_completion_indicator: true
+  no_basics_teaching: true
+
+quality_scores:
+  accuracy: 96
+  completeness: 89
+  clarity: 92
+  consistency: 97
+  correctness: 100
+  usability: 95
+
+notes: |
+  Type purity 93% How-to. Focused on single task (run the game). Assumes user knows Unity editor basics (Play button, scene opens, etc.). No teaching what singletons are; only mentions them as context for why _preload matters. Minor explanation risk in "Why _preload" subsection (4 lines), but necessary for troubleshooting. Flesch-Kincaid ~71.
+
+# Scores above are the authoring agent's estimates, not tool-measured. Invented claims (leaderboards, multiplayer, cloud save) removed by hand 2026-10-11.

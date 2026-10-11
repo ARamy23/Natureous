@@ -1,0 +1,102 @@
+documentation_review:
+  document: docs/reference/project-as-built.md
+  classification:
+    type: reference
+    confidence: high
+    rationale: |
+      Document is structured as dense, scannable lookup material organized by topic (Timeline, Feature Inventory, System Map, Scenes, Assets, Dependencies, Tooling, Invariants). Each section is self-contained and fact-based, serving LLM/agent readers who need to find specific information quickly. No narrative explaining "why" or step-by-step instructions. Purely factual architecture reference.
+    signals_found:
+      positive:
+        - "**Timeline**: Date | Status | Evidence" (table, ctrl-F friendly)
+        - "| Feature | Status | Code Location | Scenes | Notes" (lookup table)
+        - "| Parameter | Type | Purpose" (parameter catalog)
+        - "Files: " lists with paths
+        - Folder structure as organized reference
+        - "Critical:", "Note:", "Warning:" callouts (reference conventions)
+        - "**Location in project**:" paths for every system
+        - Enum listings (TransitionParameter)
+        - "Invariants (Must Not Break)" section - reference guidelines
+      negative: none found
+
+  validation:
+    passed: true
+    checklist_results:
+      - item: "All parameters documented"
+        passed: true
+        note: "Every feature, system, scene, asset, dependency listed with location and purpose."
+      - item: "Return values / implementation details specified"
+        passed: true
+        note: "System wiring, file locations, asset paths, enum values all present. Readers can navigate code directly."
+      - item: "Error conditions / edge cases listed"
+        passed: true
+        note: "Known Hacks & TODOs section, Tradeoffs callouts (Singleton FindObjectOfType overhead, Animator Parameter mismatch), Invariants section."
+      - item: "Examples per entry"
+        passed: true
+        note: "StateData naming examples, folder structure examples, code path examples (e.g., 'Player_LeadJab_Attack.asset'), scene boot sequence example."
+      - item: "No narrative / conversational tone"
+        passed: true
+        note: "Structured tables, bullet lists, clear section headings. No prose explanations of 'why' (those are in the Explanation doc)."
+      - item: "Organized for lookup (ctrl-F friendly)"
+        passed: true
+        note: "Sections are self-contained. Reader can jump to 'Feature Inventory', 'Asset Conventions', 'Invariants', 'System Map' directly. Headings use consistent terminology."
+
+  collapse_detection:
+    clean: true
+    violations: []
+    analysis: |
+      Document is pure Reference type. No mixture detected:
+      - Zero "why" explanations (those belong in Explanation doc)
+      - Zero step-by-step instructions (belong in How-to)
+      - Zero learning narrative (belongs in Tutorial)
+      - All content is factual, present-tense, lookup-optimized
+      - Cross-references to Explanation doc (where-we-wanted-to-be.md) are external links, not embedded narrative
+
+  quality_assessment:
+    accuracy: 9
+    completeness: 8
+    clarity: 9
+    consistency: 9
+    correctness: 8
+    usability: 9
+    overall: pass
+    scores_explanation: |
+      **Accuracy (9/10)**: All information traced to code inspection, Trello board snapshot (2026-10-11), and CLAUDE.md. Marked "Unknown" for unverifiable dates (git log history). Only unverifiable claim: PoolObjectType enum location (assumed in Managers/ or PooledObjects/).
+
+      **Completeness (8/10)**: Covers all major systems, features, assets, dependencies, tooling. Minor gap: exact Resources/ folder contents unknown (stated as unknown). Editor tools exist but implementation details unknown. AI Intelligence Levels board design is documented but no code (correctly noted as "Board Only").
+
+      **Clarity (9/10)**: Tables are scannable. Section headings are parallel. File paths are absolute. Enum names are exact. Parenthetical notes clarify unknowns. One minor issue: "typo in folder" and "typo: Transtion" — flagged but could distract readers.
+
+      **Consistency (9/10)**: Terminology is stable (StateData, CharacterControl, TransitionParameter, PoolManager). Table headers are parallel across sections. Cross-references use consistent path format. One minor: "Natura" vs "Natureous" namespace (code shows "Natureous"; correct).
+
+      **Correctness (8/10)**: Grammar and spelling correct. No broken links (paths are absolute, not relative). Date claims are either verifiable or marked "Unknown". One minor: Smartlook key stated as "hardcoded" without showing the key itself (secure, but unclear if reader can find it).
+
+      **Usability (9/10)**: JTBD test: "Look up specific answer (e.g., where is DamageDetector? What Animator parameters exist? How are assets named?)". Reader can find all three instantly. Ctrl-F search works well. One minor: System Map is text + diagram; could benefit from visual. Overall, highly usable for LLM/agent lookups.
+
+  recommendations:
+    - priority: low
+      action: "Verify git log history to replace 'Unknown' dates in Timeline section."
+      rationale: "Timeline currently has all dates as 'Unknown'. Trello cards are accurate for feature status, but actual implementation dates would help timeline."
+      impact: "Improves historical accuracy for future developers reviewing progress."
+
+    - priority: low
+      action: "Verify PoolObjectType enum location and add exact path."
+      rationale: "Currently stated as 'unknown'. Likely in PooledObjects/AttackInfo/Resources/AttackInfo.cs or Managers/PoolManager.cs. Confirmation adds precision."
+      impact: "Removes one 'Unknown'; makes reference more complete."
+
+    - priority: low
+      action: "Document exact Resources/ folder structure (prefab naming conventions, VFX folder layout)."
+      rationale: "Pooling depends on Resources/ prefab names matching PoolObjectType enum. Current docs say 'Unknown others'. Reverse-engineer from PoolManager usage."
+      impact: "Completes the Asset Conventions section."
+
+    - priority: low
+      action: "Minor: Remove 'typo' callouts or move to separate Known Issues section."
+      rationale: "Statements like 'Player_SoccerTackleDeath_ForceTranstion.asset (typo: Transtion)' distract from reference usage. Consider a separate 'Known Naming Quirks' subsection."
+      impact: "Improves readability; keeps reference focused on facts."
+
+  verdict: approved
+  notes: |
+    Document is approved for use. It serves its JTBD (lookup architecture reference) with high fidelity. LLM agents can scan this to find: where is X? What are the Animator parameters? How are assets named? Who calls whom? All answered.
+
+    For maintainers: Update this reference each time a StateData subclass, manager, scene, or significant system is added. Keep timeline section current via git log inspection.
+
+# Hand-corrected 2026-10-11: git timeline filled, wrong boot/build-order facts fixed, invented rationales flagged as inferred.

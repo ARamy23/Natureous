@@ -1,0 +1,109 @@
+documentation_review:
+  document: docs/explanation/where-we-wanted-to-be.md
+  classification:
+    type: explanation
+    confidence: high
+    rationale: |
+      Document explains design reasoning, architectural choices, tradeoffs, and lessons. Primary content answers "why was X chosen?" (Animator-driven state machine, pooling, singletons, analytics-first). Discusses alternatives not chosen and their costs. Addresses conceptual understanding of design philosophy, not task completion or API reference. No step-by-step instructions. Content is discursive, reasoning-focused, suitable for architects and reviewers.
+    signals_found:
+      positive:
+        - "Why This Choice:" sections (design rationale)
+        - "Alternative not chosen:" and "Why not?" pattern
+        - "Tradeoff:" paragraphs (explicit reasoning about costs)
+        - "Q1–Q7: Lessons Carried Forward (Questions for Next Wave)" (reasoning for future decisions)
+        - "Discusses alternatives" (e.g., Update loops vs. Animator, Physics-first vs. Animation-first)
+        - "Design Philosophy Summary" (conceptual unification)
+        - "Background at [Explanation: Architecture]" style links (context)
+        - "The core insight:" and "Secondary benefit:" (reasoning language)
+      negative: none found
+
+  validation:
+    passed: true
+    checklist_results:
+      - item: "Addresses 'why' not 'what'"
+        passed: true
+        note: "'Why Animator-driven?' (sync guarantees, composition). 'Why pooling?' (60 FPS, no GC spikes). 'Why singletons?' (rapid iteration, no wiring). Every choice justified."
+      - item: "Provides context and reasoning"
+        passed: true
+        note: "Each section grounds the choice in game design principles (responsiveness, composition, data-driven iteration) and practical constraints (GC pressure, mobile performance)."
+      - item: "Discusses alternatives"
+        passed: true
+        note: "Every major choice explicitly lists 'Alternative not chosen' with rationale for why that path was rejected."
+      - item: "No task steps"
+        passed: true
+        note: "Zero instructions like 'Do this', 'Step 1', 'Create X'. Content is conceptual, not procedural."
+      - item: "Builds conceptual model"
+        passed: true
+        note: "Reader finishes understanding not just 'what' (Animator state machine) but 'why' (animation sync, composition, team velocity)."
+      - item: "Links to related docs"
+        passed: true
+        note: "References to Reference doc (project-as-built.md), Trello board, game-vision.md, character-architecture.md. Properly external links."
+
+  collapse_detection:
+    clean: true
+    violations: []
+    analysis: |
+      Document is pure Explanation type. No type mixing detected:
+      - Zero step-by-step instructions (belong in How-to)
+      - Zero lookup tables or API reference (belong in Reference)
+      - Zero "Getting Started" or first-time learning narrative (belong in Tutorial)
+      - All content is discursive reasoning about design, tradeoffs, and philosophy
+      - "Lessons Carried Forward (Questions for Next Wave)" section is reflective, not prescriptive — poses questions for future design work, not action items
+      - Links to Reference doc (project-as-built.md) are external; explanation doesn't embed system details
+
+  quality_assessment:
+    accuracy: 8
+    completeness: 8
+    clarity: 8
+    consistency: 9
+    correctness: 9
+    usability: 8
+    overall: pass
+    scores_explanation: |
+      **Accuracy (8/10)**: All architectural choices are traced to code (Animator integration, StateData pattern, PoolManager, Singletons) and CLAUDE.md. Trello board assertions (game vision, backlog status) are from official snapshot (2026-10-11). Roundbeargames reference is present in codebase. Marked "Unknown" for historical context (dates, full reasoning from design meetings). One minor: "alternatives not chosen" are inferred from architectural patterns, not from documented decision records (ADRs). Suitable for explanation but not legal-grade decision history.
+
+      **Completeness (8/10)**: Covers all major architectural choices (Animator state machine, pooling, singletons, analytics-first). Includes tradeoffs (animation-first vs. physics-first, pooling efficiency vs. memory, tight coupling vs. portability). "Lessons Carried Forward" provides forward-looking questions. Minor gaps: smaller design choices (why Rigidbody for physics? why Cinemachine for camera?) are not covered—scope focused on arch-level decisions.
+
+      **Clarity (8/10)**: Reasoning is explicit and structured ("What was chosen / Alternative not chosen / Why This Choice / Tradeoff"). Paragraphs are discursive but organized. Headings are clear. One minor issue: "Lessons Carried Forward" section uses open questions ("Q1–Q7"); readers may want more definitive takeaways. However, this aligns with JTBD (understand rationale, not get marching orders), so it's appropriate.
+
+      **Consistency (9/10)**: Terminology is stable (StateData, Animator, Singletons, pooling). Structure repeats across decisions ("What / Alternative / Why / Tradeoff"). Tone is balanced (no prescriptions, only reasoning). One minor: "Question for next time:" and "What to watch:" language is slightly different per Q, but this is acceptable variation in reflective tone.
+
+      **Correctness (9/10)**: Grammar and spelling correct throughout. No broken links. Code references are accurate (StateData file path, PoolManager structure, Singleton implementation). One edge case: Roundbeargames tutorial is mentioned but not deeply analyzed—readers must infer its influence from pattern matching.
+
+      **Usability (8/10)**: JTBD test: "Understand design rationale so I can extend or critique it." Reader finishes knowing why Animator was chosen (sync), why pooling (performance), why singletons (speed). Extends naturally to "could I refactor singletons? Should I?" The "Lessons Carried Forward" section explicitly frames open questions for next phase. Slight friction: open questions vs. definitive answers—some readers may want "do this" conclusions. But the JTBD is conceptual understanding, not action items, so this is correct.
+
+  recommendations:
+    - priority: medium
+      action: "Link each design choice to specific code file(s) and example usage."
+      rationale: "Current version states 'Animator state machine' but doesn't show CharacterState.cs code snippet. Adding 1–2 line examples (StateData.OnEnter signature, Singleton.Instance pattern) would ground reasoning in concrete code."
+      impact: "Improves usability for developers unfamiliar with the codebase; makes 'why' more convincing."
+      example: |
+        Add after 'Why Animator-Driven...':
+        ```csharp
+        // Example: StateData callback structure
+        public abstract class StateData : ScriptableObject {
+          public abstract void OnEnter(CharacterState state, Animator animator, AnimatorStateInfo info);
+          public abstract void UpdateAbility(CharacterState state, Animator animator, AnimatorStateInfo info);
+          public abstract void OnExit(CharacterState state, Animator animator, AnimatorStateInfo info);
+        }
+        ```
+
+    - priority: low
+      action: "Expand 'Lessons Carried Forward' with a section on 'What Actually Worked Well'."
+      rationale: "Current section is all questions/uncertainties. Balancing with 'This pattern scaled well to Release 0.2' or 'Analytics integration was more valuable than expected' would show confidence in choices."
+      impact: "Makes explanation more constructive; less purely reflective."
+
+    - priority: low
+      action: "Add decision record (ADR) format for major choices, with date and decision context."
+      rationale: "Knowing 'Animator-driven chosen 2021-06-15 because we needed animation sync for hit detection' adds historical weight. Current version infers design process but doesn't ground it."
+      impact: "Improves traceability for future maintainers; justifies 'why' with temporal context."
+
+  verdict: approved
+  notes: |
+    Document is approved for use. It successfully explains the design rationale for Natureous's core architecture in a discursive, reasoning-focused way. Readers understand not just that we chose Animator-driven state machines, but why (sync guarantees, composition, rapid iteration). Tradeoffs are explicit (complexity, Unity lock-in, Singleton overhead).
+
+    The "Lessons Carried Forward" section is particularly strong—it frames design uncertainties as open questions for the next phase, avoiding both false prescriptions and defeatism.
+
+    For maintainers: When you make major architectural decisions (e.g., add a health system, implement AI intelligence levels, refactor singletons), document the rationale here. Keep this section as a living record of "why we chose X and what we learned."
+
+# Hand-corrected 2026-10-11: git timeline filled, wrong boot/build-order facts fixed, invented rationales flagged as inferred.

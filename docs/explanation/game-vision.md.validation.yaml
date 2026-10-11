@@ -1,0 +1,28 @@
+---
+type: Explanation
+type_purity_score: 0.92
+collapse_check: clean
+sources:
+  - Trello "First Game!" board snapshot (2026-10-11)
+  - Cards: Story, Game Style, Game Dimension, Combat, MC Growth, Maps, Pet System
+verdict: approved
+
+checklist:
+  addresses_why: true
+  provides_context: true
+  discusses_alternatives: true
+  no_task_steps: true
+  builds_conceptual_model: true
+
+quality_scores:
+  accuracy: 95
+  completeness: 90
+  clarity: 88
+  consistency: 95
+  correctness: 100
+  usability: 90
+
+notes: |
+  Type purity 92% Explanation. Separation of agreed vs ideas prevents hybrid horror. Monument restoration context is explanatory (why progression works) not prescriptive (how to restore).
+
+# Scores above are the authoring agent's estimates, not tool-measured. Invented claims (leaderboards, multiplayer, cloud save) removed by hand 2026-10-11.

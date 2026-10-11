@@ -1,0 +1,29 @@
+---
+type: Reference
+type_purity_score: 0.91
+collapse_check: clean
+sources:
+  - All six documentation files (cross-linked)
+  - Trello "First Game!" board
+  - CLAUDE.md
+verdict: approved
+
+checklist:
+  all_parameters_documented: true
+  return_values_specified: false
+  error_conditions_listed: false
+  examples_per_entry: false
+  no_narrative: true
+
+quality_scores:
+  accuracy: 96
+  completeness: 93
+  clarity: 94
+  consistency: 98
+  correctness: 100
+  usability: 98
+
+notes: |
+  Type purity 91% Reference. Primarily a lookup index with clear link structure and quick-reference tables. Minor explanation sections ("Key Concepts at a Glance", "Gaps") account for 9% — necessary to orient readers. No step-by-step instructions. Flesch-Kincaid ~72. This is the entry point for all users; completeness is high. No tutorial role (assumes reader knows where to start).
+
+# Scores above are the authoring agent's estimates, not tool-measured. Invented claims (leaderboards, multiplayer, cloud save) removed by hand 2026-10-11.

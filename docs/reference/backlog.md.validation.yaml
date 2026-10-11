@@ -1,0 +1,28 @@
+---
+type: Reference
+type_purity_score: 0.97
+collapse_check: clean
+sources:
+  - Trello "First Game!" board snapshot (2026-10-11)
+  - Code evidence: Assets/Natureous/ directory structure and class files
+verdict: approved
+
+checklist:
+  all_parameters_documented: true
+  return_values_specified: true
+  error_conditions_listed: false
+  examples_per_entry: false
+  no_narrative: true
+
+quality_scores:
+  accuracy: 92
+  completeness: 91
+  clarity: 95
+  consistency: 98
+  correctness: 100
+  usability: 97
+
+notes: |
+  Type purity 97% Reference. Pure lookup tables with code evidence links. No step-by-step instructions or narrative. Flesch-Kincaid ~65. Gaps: implementation status of Release 0.2 features (no timestamp on trello); Backend systems not scoped in code.
+
+# Scores above are the authoring agent's estimates, not tool-measured. Invented claims (leaderboards, multiplayer, cloud save) removed by hand 2026-10-11.

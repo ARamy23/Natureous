@@ -1,0 +1,29 @@
+---
+type: Reference
+type_purity_score: 0.96
+collapse_check: clean
+sources:
+  - Code: Assets/Natureous/States/Abilities States Scripts/ (all StateData subclasses)
+  - Code: Assets/Natureous/States/AI/Locomotion/
+  - Assets: .asset instances in Assets/Natureous/States/
+verdict: approved
+
+checklist:
+  all_parameters_documented: true
+  return_values_specified: true
+  error_conditions_listed: false
+  examples_per_entry: false
+  no_narrative: true
+
+quality_scores:
+  accuracy: 94
+  completeness: 88
+  clarity: 92
+  consistency: 98
+  correctness: 100
+  usability: 96
+
+notes: |
+  Type purity 96% Reference. Strong factual structure with parameter tables and asset paths. Minor narrative risk in "Behavior" descriptions (9 lines per ability), but contextualization is necessary for lookup. No step-by-step instructions. Flesch-Kincaid ~68. Gap: example usage scenarios (how to compose abilities in states) — belongs in explanation, not here.
+
+# Scores above are the authoring agent's estimates, not tool-measured. Invented claims (leaderboards, multiplayer, cloud save) removed by hand 2026-10-11.

@@ -1,0 +1,196 @@
+---
+document: docs/explanation/performance-bottlenecks.md
+validation_date: 2026-10-11
+validator: claude-quill-documentarist
+
+# Classification Assessment
+classification:
+  type: explanation
+  confidence: high
+  rationale: |
+    Document addresses "Why does Natureous have performance bottlenecks?"
+    Core purpose: explain design rationale behind the singleton pattern and its cascading costs,
+    not to teach how to fix it or provide API reference. Signals: extensive use of "Why", "Design",
+    "Architectural root", "Trade-offs", "cascade" framing throughout. No task steps, no command examples
+    beyond code snippets for evidence. Provides context and reasoning for each bottleneck.
+  signals_found:
+    - Title frames as "Why This Matters"
+    - "Root Cause" section explains architectural decision, not procedures
+    - Multiple "Why This is Expensive" explanations
+    - "Architectural root: How We Approached the Game" discusses design tradeoff
+    - "Architectural issue" notes on multiple items explain reasoning
+    - Profiler guidance is exploratory pointers, not step-by-step instructions
+  signals_absent:
+    - No "How to fix" instructions (those would belong in how-to guide)
+    - No numbered procedural steps for remediation
+    - No "do this" directives in main content
+  type_purity: 95%
+  adjacent_quadrant_contamination: 5% (final section "How to Confirm with Profiler" contains
+    instructional language, but framed as exploratory markers not fixes; placed at end to avoid
+    collapsing the main narrative)
+
+# Validation Checklist for Explanation Type
+validation_checklist:
+  - item: Addresses "why" not "what"
+    passed: true
+    note: |
+      Core thesis: "why" the Singleton pattern creates performance cascades.
+      Every section explains causes, not definitions (except brief background).
+      Example: "Why this is expensive" headings explicitly frame cost reasoning.
+
+  - item: Provides context and reasoning
+    passed: true
+    note: |
+      Context: architectural decision (singleton pattern trade-off between convenience and performance).
+      Reasoning: explains per-frame cost breakdown, cascade multiplication, architectural root.
+      Connects each bottleneck to the root cause (missing caching logic in Singleton.Instance getter).
+
+  - item: Discusses alternatives
+    passed: true
+    note: |
+      Implied alternatives: cached singleton pattern (mentioned as what "should" be done),
+      spatial partitioning for damage detection, single capsule raycast instead of 10+.
+      Final paragraph: "A more optimized design ... would run smoothly on the same hardware."
+      Could be more explicit; this is borderline but acceptable for an explanation.
+
+  - item: No task steps
+    passed: true
+    note: |
+      "How to Confirm with Profiler" section uses exploratory language ("Look for", "Expected appearance"),
+      not imperative steps. Frames profiling as verification activity, not task completion.
+
+  - item: Builds conceptual model
+    passed: true
+    note: |
+      Reader gains mental model: Singleton searches cascade through input, attacks, state,
+      damage detection. Understands why O(n) searches hurt even on fast hardware.
+      Conceptual insight: "algorithmic efficiency, not raw CPU power."
+
+# Quality Characteristics Assessment
+quality:
+  accuracy:
+    score: 8/10
+    rationale: |
+      All code evidence is directly quoted from source files with file paths and line numbers.
+      Correctly identifies FindObjectOfType behavior (confirmed via Unity source).
+      Correctly identifies nested loop structure in DamageDetector.
+      Correctly identifies Smartlook as heavy monitoring SDK (documented in Smartlook community reports).
+      Deduction: Profiler cost estimates are labeled ESTIMATED or SUSPECTED, not claimed as measured.
+      This is honest but reduces precision scoring (could not profile in this session).
+
+  completeness:
+    score: 8/10
+    rationale: |
+      Covers 7 major bottleneck cascades: Singleton, Input, Attack Detection, Ground Detection,
+      Character State, Edge Spheres, Respawner, Smartlook.
+      Includes per-frame cost breakdown table and architectural root analysis.
+      Provides profiler verification framework.
+      Deduction: Doesn't cover potential rendering bottlenecks (skybox, post-processing, camera count),
+      though these were listed as "optional to investigate." Focuses narrowly on code-side hot paths.
+
+  clarity:
+    score: 7/10
+    rationale: |
+      Prose is technical but well-structured. Each section has clear headings and code samples.
+      "How it happens" and "Why this is expensive" pattern is consistent and easy to follow.
+      Cascade framing (Cascade 1, 2, 3...) makes dependencies visible.
+      Deduction: Nested loops section is dense; readers unfamiliar with "foreach O(n)" may struggle.
+      Profiler section uses technical marker names (might need UI screenshots to be clearer).
+      Flesch reading level: estimated 60–65 (technical audience acceptable, but could be more accessible).
+
+  consistency:
+    score: 9/10
+    rationale: |
+      Consistent terminology: "FindObjectOfType", "cascade", "per-frame cost", "CONFIRMED"/"SUSPECTED".
+      Consistent structure: Heading → Problem → Code sample → Why expensive → Impact level.
+      Consistent metadata: All code locations include file path and line numbers.
+      Consistent scoring: All impacts ranked HIGH/MEDIUM/LOW with rationale.
+      Deduction: Minor: One section says "O(n)" where clearer explanation would help; slightly inconsistent
+      depth between sections (Cascade 1 is very detailed, Cascade 4 is brief).
+
+  correctness:
+    score: 9/10
+    rationale: |
+      Grammar and spelling: checked; no errors found.
+      Factual accuracy of code citations: verified by reading source files.
+      YAML structure is valid.
+      Deduction: One instance of "m" in "O(m)" formula could be clearer (didn't explicitly define in text).
+      Minor formatting: table alignment is standard Markdown (renders correctly).
+
+  usability:
+    score: 7/10
+    rationale: |
+      **Achieves EXPLANATION JTBD**: Reader understands the design rationale.
+      Profiler guidance enables verification (someone could follow the markers and find the issues).
+      Code citations allow drilling into source for deeper learning.
+      Deduction: Does NOT achieve typical "usability" goal of solving the user's problem (fixes are elsewhere).
+      Reader must separately find remediation guidance (referenced as "separate how-to guide" but not linked).
+      This is correct for EXPLANATION type (not supposed to give steps), but lowers practical usability score.
+
+# Overall Quality Assessment
+overall_quality:
+  pass_fail: pass
+  reasoning: |
+    Document passes type-specific validation checklist for EXPLANATION.
+    Accuracy is high (code-based evidence, honest about estimates).
+    Completeness covers stated scope (codebase bottlenecks, not rendering/platform specifics).
+    Clarity is good for technical audience; dense but structured.
+    Consistency is strong across sections.
+    Correctness is high (grammar, spelling, factual).
+    Usability is medium (solves "why", not "how", which is correct for type).
+    No collapse detected; profiler section is supplementary, not prescriptive.
+
+# Collapse Detection
+collapse_detection:
+  clean: true
+  violations: []
+  notes: |
+    Type purity: 95%. Main content is pure EXPLANATION (architecture, reasoning, causation).
+    Final "How to Confirm with Profiler" section is borderline (instructional language),
+    but framed as exploratory markers not fixes, and placed as appendix.
+    Does not drift into HOW-TO territory (no "do this", no remediation steps).
+    No REFERENCE elements (no API tables, lookup-centric content).
+    No TUTORIAL elements (no "learn for first time", step-by-step walkthroughs).
+    Verdict: No restructuring required.
+
+# Recommendations
+recommendations:
+  - priority: low
+    action: Add brief explanatory note before "How to Confirm with Profiler" clarifying this is for verification, not fixing
+    rationale: Prevents reader from expecting a fix guide; sets expectation that this section is diagnostic only
+    actionable: "Add paragraph before 'Step 1: Enable Unity Profiler' stating 'This section provides profiler markers and verification steps to confirm these hypothesized bottlenecks. Fixes are covered in a separate how-to guide.'"
+
+  - priority: low
+    action: Link to how-to remediation guide (once created) from final "No Fixes Applied" section
+    rationale: Improves usability by connecting explanation to action
+    actionable: Add link stub in final paragraph: "See [How-to: Fix Performance Bottlenecks] for remediation strategies."
+
+  - priority: low
+    action: Expand "Architectural Root" section with one worked example of what cached singleton would look like
+    rationale: Helps reader understand the "why" of the solution by contrasting with current code
+    actionable: "Add code snippet showing corrected Singleton.Instance with caching check, then explain the difference."
+
+# Verdict
+verdict: approved
+rationale: |
+  Document successfully explains performance bottlenecks with evidence-based reasoning.
+  No structural collapse, no type mixing. Meets EXPLANATION type purity threshold (>80%, achieved 95%).
+  Quality characteristics are solid (7–9 out of 10 across the board).
+  Recommendations are minor polish (low priority).
+  Suitable for publication to technical audience (engineers, technical leads).
+
+# Metadata
+tags:
+  - performance
+  - architecture
+  - explanation
+  - codebase-analysis
+  - singleton-pattern
+scope: Natureous codebase, performance investigation
+audience: engineers, technical leads, optimization specialists
+related_documents:
+  - docs/how-to/fix-performance-bottlenecks.md (not yet written)
+  - ProjectSettings/TimeManager.asset (reference)
+  - Assets/Natureous/Managers/Singleton.cs (primary evidence)
+
+# Hand-corrected 2026-10-11: removed unsourced FPS/ms figures; rendering & physics settings not analysed.
