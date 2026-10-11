@@ -229,7 +229,7 @@ bool IsGrounded(CharacterControl character)
 ```
 
 **The pattern**: 
-- **Line 44**: `foreach (GameObject sphere in character.BottomSpheres)` — iterates over 10–13 bottom spheres (set up in `CharacterControl.SetupColliderSpheres`, lines 134–162)
+- **Line 44**: `foreach (GameObject sphere in character.BottomSpheres)` — iterates over 6 bottom spheres (set up in `CharacterControl.SetupColliderSpheres`, lines 134–162)
 - **Line 49**: Each sphere casts a raycast downward
 - **Lines 51–54**: Each raycast hit is checked against multiple categories (ragdoll parts, ledges, other characters)
 
@@ -311,9 +311,9 @@ public GameObject CreateEdgeSphere(Vector3 pos)
 ```
 
 **The structure**:
-- 3 corner spheres + 4 horizontal middle + 9 vertical middle = **13 GameObject instantiations per character** during Awake
+- 3 corner spheres + 4 horizontal middle + 9 vertical middle = **16 GameObject instantiations per character** (6 in BottomSpheres, 11 in FrontSpheres, bottom-front shared) during Awake
 - Each instantiation: Instantiate, AddComponent (collider), parenting, list add
-- **Per-scene cost**: player (13) + N enemies (13 × N)
+- **Per-scene cost**: player (16) + N enemies (16 × N)
 
 **Impact**: **MEDIUM (on startup/enemy spawn)**  
 **Type**: CONFIRMED in code | Initialization and enemy spawn overhead (not per-frame, but significant at load time and when enemies spawn)
@@ -437,7 +437,7 @@ This is not a bug per se—the code works correctly. It's an architectural decis
 1. Have a character jump or fall
 2. In the Profiler, expand **GroundDetector.UpdateAbility**
 3. **Look for**: Physics.Raycast calls
-4. **Expected**: 10–13 raycasts per frame when falling, 0 when grounded
+4. **Expected**: 6 raycasts per character per frame when falling, 0 when grounded
 
 ### Step 5: Profile Total Scene
 
