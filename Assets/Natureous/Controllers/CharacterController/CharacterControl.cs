@@ -119,7 +119,7 @@ namespace Natureous
         public void TurnOnRagdoll()
         {
             Rigidbody.useGravity = false;
-            Rigidbody.velocity = Vector3.zero;
+            Rigidbody.linearVelocity = Vector3.zero;
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
             SkinnedMeshAnimator.enabled = false;
             SkinnedMeshAnimator.avatar = null;
@@ -127,7 +127,7 @@ namespace Natureous
             foreach (Collider collider in RagdollParts)
             {
                 collider.isTrigger = false;
-                collider.attachedRigidbody.velocity = Vector3.zero;
+                collider.attachedRigidbody.linearVelocity = Vector3.zero;
             }
         }
 
@@ -163,14 +163,14 @@ namespace Natureous
 
         private void FixedUpdate()
         {
-            if (Rigidbody.velocity.y < 0f)
+            if (Rigidbody.linearVelocity.y < 0f)
             {
-                Rigidbody.velocity += Vector3.down * GravityMultiplier;
+                Rigidbody.linearVelocity += Vector3.down * GravityMultiplier;
             }
 
-            if (Rigidbody.velocity.y > 0f && !Jump)
+            if (Rigidbody.linearVelocity.y > 0f && !Jump)
             {
-                Rigidbody.velocity += Vector3.down * PullMultiplier;
+                Rigidbody.linearVelocity += Vector3.down * PullMultiplier;
             }
         }
 

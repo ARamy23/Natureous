@@ -14,7 +14,7 @@ namespace Natureous
             {
                 if (cameraController == null)
                 {
-                    cameraController = GameObject.FindObjectOfType<CameraController>();
+                    cameraController = GameObject.FindAnyObjectByType<CameraController>();
                 }
 
                 return cameraController;

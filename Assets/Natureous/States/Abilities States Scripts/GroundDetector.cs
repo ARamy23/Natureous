@@ -34,7 +34,7 @@ namespace Natureous
 
         bool IsGrounded(CharacterControl character)
         {
-            float yVelocity = character.Rigidbody.velocity.y;
+            float yVelocity = character.Rigidbody.linearVelocity.y;
             if (yVelocity > -0.001f && yVelocity <= 0f)
             {
                 return true;

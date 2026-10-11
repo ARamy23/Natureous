@@ -37,7 +37,7 @@ namespace Natureous
         private void HandleTogglingGravity(CharacterControl characterControl)
         {
             characterControl.Rigidbody.useGravity = IsEnabled;
-            characterControl.Rigidbody.velocity = Vector3.zero;
+            characterControl.Rigidbody.linearVelocity = Vector3.zero;
 
         }
     }

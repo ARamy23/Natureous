@@ -80,3 +80,24 @@ grep -E "error CS|Scripts have compiler errors|obsolete" /tmp/spike_unity6-migra
 ```
 Pass criteria: exit 0, zero `error CS` lines. After that, run the e2e step: play `_preload`, check that Sandbox loads and the player can be controlled (needs a PlayMode test or a manual run).
 Run it twice: once with the unmodified manifest (to measure the raw blockers) and once with the step-2 edits.
+
+## Phase B results (editor 6000.6.5f1 arm64, 2026-10-11)
+
+Run on worktree `../Natureous-u6`, branch `spike/unity6-migration`. Logs in `../Natureous-u6-logs/` (not committed).
+
+| Step | Result | Time |
+|---|---|---|
+| Open untouched project (`-accept-apiupdate`) | Packages auto-upgraded (URP 7.1.8 → 17.6.0, Cinemachine → 6.6.0, Timeline 6.6.0, uGUI 2.6.0, Test Framework 1.8.0; TextMeshPro folded into uGUI). API updater rewrote `CharacterControl.cs` (`velocity` → `linearVelocity`). **3 compile errors, all in GameAnalytics editor code** (`InstanceIDToObject`, `hierarchyWindowItemOnGUI` now errors) | 49 s cold |
+| Remove `Assets/GameAnalytics`, stub calls in `AnalyticsManager` with `Debug.Log` | 0 compile errors. Own code: only obsolete warnings (`FindObjectOfType` ×42, `FindObjectsOfType` ×14, `Rigidbody.velocity` ×10) | 21 s warm |
+| PlayMode boot smoke (`Assets/Tests/PlayMode/BootSmokeTest.cs`) | Failed: Sandbox held a missing GameAnalytics prefab instance | — |
+| Remove missing prefab instances via `Assets/Editor/Migration/RemoveMissingPrefabs.cs` (`-executeMethod`) | Sandbox cleaned through the Unity API (no hand-edited YAML) | — |
+| PlayMode boot smoke, strict (any logged error fails) | **PASSED**: `_preload` → Sandbox, 13 `CharacterControl`s | 12.7 s |
+
+**Verdict: WORKS.** The project opens, compiles and boots in Unity 6.6 after removing GameAnalytics.
+
+Not yet checked: rendering correctness (pink materials), gameplay behaviour, Android/iOS builds, Smartlook/AppCenter at runtime, `com.unity.ide.vscode` (deprecated, still resolves), the Cinemachine HDRP sample asmref warning.
+
+**Tooling notes:**
+- Headless test runs need the editor binary's `-runTests`. `unity test` (CLI 1.0.0-beta.12) blocked silently on a macOS password prompt the first time; the owner has since allowed it.
+- The test asmdef must not list the test runner both in `references` and `optionalUnityReferences` ("duplicate references" aborts compilation without an `error CS` line).
+- Game code has no asmdef, so tests reach it by type name via reflection. Adding a `Natureous` asmdef would let tests reference it directly.

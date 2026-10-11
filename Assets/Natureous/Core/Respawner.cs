@@ -28,7 +28,7 @@ namespace Natureous
 
         private IEnumerator Transition()
         {
-            SceneFader fader = FindObjectOfType<SceneFader>();
+            SceneFader fader = FindAnyObjectByType<SceneFader>();
 
             yield return fader.FadeOut(0.5f);
             yield return new WaitForSeconds(0.5f);
@@ -48,7 +48,7 @@ namespace Natureous
 
         private IEnumerator TransitionBackToLife(RuntimeAnimatorController runtimeAnimator)
         {
-            SceneFader fader = FindObjectOfType<SceneFader>();
+            SceneFader fader = FindAnyObjectByType<SceneFader>();
 
             yield return fader.FadeOut(0.5f);
             yield return new WaitForSeconds(0.5f);

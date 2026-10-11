@@ -12,14 +12,18 @@ namespace Natureous
         {
             get
             {
-                _instance = (T)FindObjectOfType(typeof(T));
-                if(_instance == null)
+                // Unity's == null is also true for destroyed objects, so a dead instance is looked up again.
+                if (_instance == null)
                 {
-                    GameObject obj = new GameObject();
-                    _instance = obj.AddComponent<T>();
-                    obj.name = typeof(T).ToString();
+                    _instance = FindAnyObjectByType<T>();
+                    if (_instance == null)
+                    {
+                        GameObject obj = new GameObject();
+                        _instance = obj.AddComponent<T>();
+                        obj.name = typeof(T).ToString();
+                    }
+                    DontDestroyOnLoad(_instance);
                 }
-                DontDestroyOnLoad(_instance);
                 return _instance;
             }
         }
